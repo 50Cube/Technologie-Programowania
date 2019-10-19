@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Zadanie1
+﻿namespace Zadanie1
 {
-    class Katalog
+    public class Katalog
     {
-        public Katalog()
+        public Katalog(Autor autor, string tytul, int rokWydania)
         {
+            this.autor = autor;
+            this.tytul = tytul;
+            this.rokWydania = rokWydania;
         }
+
+        public Autor autor { get; set; }
+        public string tytul { get; set; }
+        public int rokWydania { get; set; }
     }
 }

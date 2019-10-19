@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    public class OpisStanu
+    class DataContext
     {
-        public OpisStanu()
+        public DataContext()
         {
+            elementyWykazu = new List<Wykaz>();
         }
+
+        public List<Wykaz> elementyWykazu { get; }
+        
     }
 }
