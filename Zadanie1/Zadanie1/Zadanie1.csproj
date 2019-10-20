@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Autor.cs" />
     <Compile Include="DataContext.cs" />
+    <Compile Include="DataRepository.cs" />
     <Compile Include="Katalog.cs" />
     <Compile Include="OpisStanu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
