@@ -9,5 +9,10 @@ namespace Zadanie1
     public class DataRepository
     {
         private DataContext dataContext;
+
+        public DataRepository(WypelnianieStalymi ws)
+        {
+            ws.wypelnij(dataContext);
+        }
     }
 }
