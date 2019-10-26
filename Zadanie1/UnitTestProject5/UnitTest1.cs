@@ -30,7 +30,7 @@ namespace UnitTestProject
         {
             Autor autor = new Autor("Henryk", "Sienkiewicz");
             Katalog katalog = new Katalog(autor, "Krzyzacy", 2019);
-            OpisStanu opis = new OpisStanu(katalog,1,29.99,new DateTime(2019,10,20));
+            OpisStanu opis = new OpisStanu(katalog, 1, 29.99, new DateTime(2019, 10, 20));
             DateTime data = new DateTime(2019, 10, 20);
             Assert.AreEqual(opis.dataZakupu, data);
         }
@@ -38,7 +38,7 @@ namespace UnitTestProject
         [TestMethod]
         public void TestZdarzenie()
         {
-            Wykaz osoba = new Wykaz(1,"Norbert", "Gierczak");
+            Wykaz osoba = new Wykaz(1, "Norbert", "Gierczak");
             Autor autor = new Autor("Henryk", "Sienkiewicz");
             Katalog katalog = new Katalog(autor, "Krzyzacy", 2019);
             OpisStanu opis = new OpisStanu(katalog, 1, 29.99, new DateTime(2019, 10, 20));

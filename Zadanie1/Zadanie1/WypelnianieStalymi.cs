@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Zadanie1
 {
-    public class WypelnianieStalymi
+    public class WypelnianieStalymi : IWypelnianie
     {
         public WypelnianieStalymi() { }
         
