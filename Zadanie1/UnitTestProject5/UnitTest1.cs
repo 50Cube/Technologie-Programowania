@@ -42,12 +42,8 @@ namespace UnitTestProject
             Autor autor = new Autor("Henryk", "Sienkiewicz");
             Katalog katalog = new Katalog(autor, "Krzyzacy", 2019);
             OpisStanu opis = new OpisStanu(katalog, 1, 29.99, new DateTime(2019, 10, 20));
-            Zdarzenie zdarzenie = new Zdarzenie(osoba, opis, new DateTime(2019, 10, 20));
-            Assert.IsNull(zdarzenie.dataZwrotu);
-            Assert.AreEqual(zdarzenie.dataZwrotu, null);
-            zdarzenie.dataZwrotu = new DateTime(2019, 10, 21);
-            Assert.IsNotNull(zdarzenie.dataZwrotu);
-            Assert.AreEqual(zdarzenie.dataZwrotu, new DateTime(2019, 10, 21));
+            Wypozyczenie zdarzenie = new Wypozyczenie(osoba, opis, new DateTime(2019, 10, 20));
+            Assert.AreEqual(zdarzenie.Data, new DateTime(2019, 10, 20));
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Zadanie1
 
             for (int i = 0; i < 11; i++)
             {
-                dataContext.zdarzenia.Add(new Zdarzenie(dataContext.elementyWykazu[2], dataContext.opisyStanu[i], new DateTime(2019, 11, random.Next(1, 30))));
+                dataContext.zdarzenia.Add(new Wypozyczenie(dataContext.elementyWykazu[2], dataContext.opisyStanu[i], new DateTime(2019, 11, random.Next(1, 30))));
             }
         }
     }

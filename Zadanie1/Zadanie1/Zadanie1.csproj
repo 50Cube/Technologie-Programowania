@@ -44,6 +44,7 @@
     <Compile Include="Autor.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />
+    <Compile Include="Zdarzenie.cs" />
     <Compile Include="IWypelnianie.cs" />
     <Compile Include="Katalog.cs" />
     <Compile Include="OpisStanu.cs" />
@@ -51,7 +52,8 @@
     <Compile Include="Wykaz.cs" />
     <Compile Include="WypelnianieStalymi.cs" />
     <Compile Include="WypelnianieLosowymi.cs" />
-    <Compile Include="Zdarzenie.cs" />
+    <Compile Include="Wypozyczenie.cs" />
+    <Compile Include="Zwrot.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -42,13 +42,13 @@ namespace Zadanie1
             dataContext.opisyStanu.Add(new OpisStanu(dataContext.katalogi[9], 3, 45.0, new DateTime(2019, 09, 22)));
 
 
-            dataContext.zdarzenia.Add(new Zdarzenie(dataContext.elementyWykazu[0], dataContext.opisyStanu[0], new DateTime(2019, 10, 20)));
-            dataContext.zdarzenia.Add(new Zdarzenie(dataContext.elementyWykazu[0], dataContext.opisyStanu[3], new DateTime(2019, 10, 20)));
-            dataContext.zdarzenia.Add(new Zdarzenie(dataContext.elementyWykazu[1], dataContext.opisyStanu[1], new DateTime(2019, 10, 20)));
-            dataContext.zdarzenia.Add(new Zdarzenie(dataContext.elementyWykazu[2], dataContext.opisyStanu[2], new DateTime(2019, 10, 20)));
-            dataContext.zdarzenia.Add(new Zdarzenie(dataContext.elementyWykazu[3], dataContext.opisyStanu[4], new DateTime(2019, 10, 20)));
-            dataContext.zdarzenia.Add(new Zdarzenie(dataContext.elementyWykazu[4], dataContext.opisyStanu[5], new DateTime(2019, 10, 20)));
-            dataContext.zdarzenia.Add(new Zdarzenie(dataContext.elementyWykazu[4], dataContext.opisyStanu[8], new DateTime(2019, 10, 20)));
+            dataContext.zdarzenia.Add(new Wypozyczenie(dataContext.elementyWykazu[0], dataContext.opisyStanu[0], new DateTime(2019, 10, 20)));
+            dataContext.zdarzenia.Add(new Wypozyczenie(dataContext.elementyWykazu[0], dataContext.opisyStanu[3], new DateTime(2019, 10, 20)));
+            dataContext.zdarzenia.Add(new Wypozyczenie(dataContext.elementyWykazu[1], dataContext.opisyStanu[1], new DateTime(2019, 10, 20)));
+            dataContext.zdarzenia.Add(new Wypozyczenie(dataContext.elementyWykazu[2], dataContext.opisyStanu[2], new DateTime(2019, 10, 20)));
+            dataContext.zdarzenia.Add(new Wypozyczenie(dataContext.elementyWykazu[3], dataContext.opisyStanu[4], new DateTime(2019, 10, 20)));
+            dataContext.zdarzenia.Add(new Wypozyczenie(dataContext.elementyWykazu[4], dataContext.opisyStanu[5], new DateTime(2019, 10, 20)));
+            dataContext.zdarzenia.Add(new Wypozyczenie(dataContext.elementyWykazu[4], dataContext.opisyStanu[8], new DateTime(2019, 10, 20)));
         }
     }
 }

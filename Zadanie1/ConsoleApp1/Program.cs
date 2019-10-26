@@ -16,10 +16,8 @@ namespace ConsoleApp1
             Autor autor = new Autor("Henryk", "Sienkiewicz");
             Katalog katalog = new Katalog(autor, "Krzyzacy", 2019);
             OpisStanu opis = new OpisStanu(katalog, 1, 29.99, new DateTime(2019, 10, 20));
-            Zdarzenie zdarzenie = new Zdarzenie(osoba, opis, new DateTime(2019, 10, 20));
-            Console.WriteLine("Null" + zdarzenie.dataZwrotu.ToString());
-            zdarzenie.dataZwrotu = new DateTime(2019, 10, 21,10,10,10);
-            Console.WriteLine("Nie null " + zdarzenie.dataZwrotu.ToString());
+            Wypozyczenie zdarzenie = new Wypozyczenie(osoba, opis, new DateTime(2019, 10, 20));
+            Console.WriteLine("Null" + zdarzenie.Data.ToString());
             Console.Read();
         }
     }
