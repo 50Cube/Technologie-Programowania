@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    public class DataRepository
+    public class DataRepository : IDataRepository
     {
         private DataContext dataContext = new DataContext();
 
@@ -105,7 +105,15 @@ namespace Zadanie1
 
 
         // CRUD dla Zdarzenie
+        public void AddWypozyczenie(Wypozyczenie w)
+        {
+            dataContext.Zdarzenia.Add(w);
+        }
 
+        public void AddZwrot(Zwrot z)
+        {
+            dataContext.Zdarzenia.Add(z);
+        }
 
         public void AddOpisStanu(OpisStanu opis)
         {
