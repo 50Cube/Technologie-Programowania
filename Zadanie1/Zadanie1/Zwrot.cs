@@ -8,15 +8,14 @@ namespace Zadanie1
 {
     public class Zwrot : Zdarzenie
     {
-
         public Zwrot(Wykaz osoba, OpisStanu ksiazka, DateTime zwrot)
+            : base(zwrot)
         {
-            this.osoba = osoba;
-            this.ksiazka = ksiazka;
-            this.Data = zwrot;
+            this.Osoba = osoba;
+            this.Ksiazka = ksiazka;
         }
 
-        public Wykaz osoba { get; }
-        public OpisStanu ksiazka { get; }
+        public Wykaz Osoba { get; }
+        public OpisStanu Ksiazka { get; }
     }
 }

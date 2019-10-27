@@ -10,11 +10,11 @@ namespace Zadanie1
     {
         public Autor(string imie, string nazwisko)
         {
-            this.imie = imie;
-            this.nazwisko = nazwisko;
+            this.Imie = imie;
+            this.Nazwisko = nazwisko;
         }
 
-        public string imie { get; }
-        public string nazwisko { get; }
+        public string Imie { get; }
+        public string Nazwisko { get; }
     }
 }

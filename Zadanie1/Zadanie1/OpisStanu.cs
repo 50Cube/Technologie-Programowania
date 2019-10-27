@@ -6,15 +6,15 @@ namespace Zadanie1
     {
         public OpisStanu(Katalog ksiazka, int ilosc, double cena, DateTime data)
         {
-            this.katalog = ksiazka;
-            this.ilosc = ilosc;
-            this.cena = cena;
-            this.dataZakupu = data;
+            this.Katalog = ksiazka;
+            this.Ilosc = ilosc;
+            this.Cena = cena;
+            this.DataZakupu = data;
         }
 
-        public Katalog katalog { get; }
-        public int ilosc { get; set; }
-        public double cena { get; set; }
-        public DateTime dataZakupu { get; }
+        public Katalog Katalog { get; }
+        public int Ilosc { get; set; }
+        public double Cena { get; set; }
+        public DateTime DataZakupu { get; set; }
     }
 }

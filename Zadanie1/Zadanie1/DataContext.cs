@@ -7,15 +7,15 @@ namespace Zadanie1
     {
         public DataContext()
         {
-            elementyWykazu = new List<Wykaz>();
-            katalogi = new Dictionary<int, Katalog>();
-            zdarzenia = new ObservableCollection<Zdarzenie>();
-            opisyStanu = new List<OpisStanu>();
+            ElementyWykazu = new List<Wykaz>();
+            Katalogi = new Dictionary<int, Katalog>();
+            Zdarzenia = new ObservableCollection<Zdarzenie>();
+            OpisyStanu = new List<OpisStanu>();
         }
 
-        public List<Wykaz> elementyWykazu { get; }
-        public Dictionary<int,Katalog> katalogi { get; }
-        public ObservableCollection<Zdarzenie> zdarzenia { get; }
-        public List<OpisStanu> opisyStanu { get; }
+        public List<Wykaz> ElementyWykazu { get; }
+        public Dictionary<int,Katalog> Katalogi { get; }
+        public ObservableCollection<Zdarzenie> Zdarzenia { get; }
+        public List<OpisStanu> OpisyStanu { get; }
     }
 }

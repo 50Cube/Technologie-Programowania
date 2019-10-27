@@ -4,14 +4,14 @@
     {
         public Wykaz(int id, string imie, string nazwisko)
         {
-            this.id = id;
-            this.imie = imie;
-            this.nazwisko = nazwisko;
+            this.Id = id;
+            this.Imie = imie;
+            this.Nazwisko = nazwisko;
         }
 
-        public int id { get; set; }
-        public string imie { get; set; }
-        public string nazwisko { get; set; }
+        public int Id { get; set; }
+        public string Imie { get; set; }
+        public string Nazwisko { get; set; }
 
     }
 }

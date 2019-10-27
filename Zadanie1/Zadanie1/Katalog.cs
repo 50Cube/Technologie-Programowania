@@ -2,15 +2,17 @@
 {
     public class Katalog
     {
-        public Katalog(Autor autor, string tytul, int rokWydania)
+        public Katalog(int id, Autor autor, string tytul, int rokWydania)
         {
-            this.autor = autor;
-            this.tytul = tytul;
-            this.rokWydania = rokWydania;
+            this.Id = id;
+            this.Autor = autor;
+            this.Tytul = tytul;
+            this.RokWydania = rokWydania;
         }
 
-        public Autor autor { get; set; }
-        public string tytul { get; set; }
-        public int rokWydania { get; set; }
+        public int Id { get; set; }
+        public Autor Autor { get; set; }
+        public string Tytul { get; set; }
+        public int RokWydania { get; set; }
     }
 }

@@ -5,13 +5,13 @@ namespace Zadanie1
     public class Wypozyczenie : Zdarzenie
     {
         public Wypozyczenie(Wykaz osoba, OpisStanu ksiazka, DateTime wypozyczenie)
+            : base(wypozyczenie)
         {
-            this.osoba = osoba;
-            this.ksiazka = ksiazka;
-            this.Data = wypozyczenie;
+            this.Osoba = osoba;
+            this.Ksiazka = ksiazka;
         }
 
-        public Wykaz osoba { get; }
-        public OpisStanu ksiazka { get; }
+        public Wykaz Osoba { get; }
+        public OpisStanu Ksiazka { get; }
     }
 }
