@@ -95,6 +95,42 @@ namespace DataRepositoryTest
         // testy CRUD zdarzenia
 
         [TestMethod]
+        public void TestGetAllZdarzenie()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieLosowymi());
+            Assert.AreEqual(dr.GetAllZdarzenie().Count, 10);
+        }
+
+        [TestMethod]
+        public void TestAddWypozyczenie()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieLosowymi());
+            int przed = dr.GetAllZdarzenie().Count;
+            Katalog katalog1 = new Katalog(1, new Autor("Henryk", "Sienkiewicz"), "Potop", 1886);
+            Wykaz wykaz1 = new Wykaz(20, "Oskar", "Tuszyński");
+            OpisStanu opis1 = new OpisStanu(katalog1, 2, 35, DateTime.Now);
+            dr.AddWypozyczenie(new Wypozyczenie(wykaz1, opis1, DateTime.Now));
+            int po = dr.GetAllZdarzenie().Count;
+            Assert.AreEqual(przed+1, po);
+        }
+
+
+        [TestMethod]
+        public void TestAddZwrot()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieLosowymi());
+            int przed = dr.GetAllZdarzenie().Count;
+            Katalog katalog1 = new Katalog(1, new Autor("Henryk", "Sienkiewicz"), "Potop", 1886);
+            Wykaz wykaz1 = new Wykaz(20, "Oskar", "Tuszyński");
+            OpisStanu opis1 = new OpisStanu(katalog1, 2, 35, DateTime.Now);
+            dr.AddZwrot(new Zwrot(wykaz1, opis1, DateTime.Now));
+            int po = dr.GetAllZdarzenie().Count;
+            Assert.AreEqual(przed + 1, po);
+        }
+
+
+
+        [TestMethod]
         public void TestAddOpisStanu()
         {
             DataRepository dr = new DataRepository(new WypelnianieStalymi());

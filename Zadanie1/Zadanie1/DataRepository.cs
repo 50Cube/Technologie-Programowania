@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,6 +106,11 @@ namespace Zadanie1
 
 
         // CRUD dla Zdarzenie
+        public ObservableCollection<Zdarzenie> GetAllZdarzenie()
+        {
+            return dataContext.Zdarzenia;
+        }
+
         public void AddWypozyczenie(Wypozyczenie w)
         {
             dataContext.Zdarzenia.Add(w);

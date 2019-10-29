@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    class DataService
+    public class DataService
     {
         private readonly IDataRepository dataRepository;
         public DataService(IDataRepository dR)
@@ -14,42 +14,42 @@ namespace Zadanie1
             dataRepository = dR;
         }
 
-        public void addWykaz(Wykaz k)
+        public void AddWykaz(Wykaz k)
         {
             dataRepository.AddWykaz(k);
         }
 
-        public void deleteWykaz(Wykaz k)
+        public void DeleteWykaz(Wykaz k)
         {
             dataRepository.DeleteWykaz(k);
         }
 
-        public Wykaz getWykaz(int i)
+        public Wykaz GetWykaz(int i)
         {
             return dataRepository.GetWykaz(i);
         }
 
-        public List<Wykaz> getWykazList()
+        public List<Wykaz> GetWykazList()
         {
             return dataRepository.GetAllWykaz();
         }
 
-        public void addKatalog(Katalog k)
+        public void AddKatalog(Katalog k)
         {
             dataRepository.AddKatalog(k);
         }
 
-        public void deleteKatalog(int id)
+        public void DeleteKatalog(int id)
         {
             dataRepository.DeleteKatalog(id);
         }
 
-        public Katalog getKatalog(int id)
+        public Katalog GetKatalog(int id)
         {
            return dataRepository.GetKatalog(id);
         }
 
-        public Dictionary<int,Katalog> getAllKatalog()
+        public Dictionary<int,Katalog> GetAllKatalog()
         {
            return dataRepository.GetAllKatalog();
         }
@@ -62,6 +62,11 @@ namespace Zadanie1
         public List<OpisStanu> GetAllOpisStanu()
         {
            return dataRepository.GetAllOpisStanu();
+        }
+
+        public OpisStanu GetOpisStanu(Katalog k)
+        {
+            return dataRepository.GetOpisStanu(k);
         }
 
         public void UpdateOpisStanu(Katalog katalog, int ilosc, double cena, DateTime data)
