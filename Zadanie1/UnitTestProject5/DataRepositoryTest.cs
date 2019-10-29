@@ -181,5 +181,25 @@ namespace DataRepositoryTest
             dr.DeleteOpisStanu(katalog1);
             Assert.AreEqual(dr.GetAllOpisStanu().Count, 9);
         }
+
+        [TestMethod]
+        public void TestGetZdarzeniaLog()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieLosowymi());
+            Wypozyczenie wyp = new Wypozyczenie(dr.GetWykaz(1), dr.GetOpisStanu(dr.GetKatalog(1)), new DateTime(2019, 10, 20));
+            dr.AddWypozyczenie(wyp);
+            Assert.AreEqual(1, dr.GetZdarzeniaLog().Count);
+        }
+
+        [TestMethod]
+        public void TestWystapiloZdarzenie()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieLosowymi());
+            Wypozyczenie wyp = new Wypozyczenie(dr.GetWykaz(1), dr.GetOpisStanu(dr.GetKatalog(1)), new DateTime(2019, 10, 20));
+            dr.AddWypozyczenie(wyp);
+            Assert.AreEqual(dr.GetZdarzeniaLog()[0].Substring(0,16), "Dodano zdarzenie");
+        }
+
+
     }
 }

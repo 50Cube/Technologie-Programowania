@@ -20,6 +20,7 @@ namespace Zadanie1
         ObservableCollection<Zdarzenie> GetAllZdarzenie();
         Zdarzenie GetZdarzenie(int i);
         Wykaz GetWykaz(int id);
+        List<string> GetZdarzeniaLog();
         void UpdateKatalog(int id, Autor autor, string tytul, int rok);
         bool UpdateOpisStanu(Katalog katalog, int ilosc, double cena, DateTime data);
         bool UpdateWykaz(int id, string imie, string nazwisko);

@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Collections.Specialized;
 namespace Zadanie1
 {
     public class DataRepository : IDataRepository
@@ -14,6 +12,7 @@ namespace Zadanie1
         public DataRepository(IWypelnianie wypelnianie)
         {
             wypelnianie.Wypelnij(dataContext);
+            dataContext.Zdarzenia.CollectionChanged += WystapiloZdarzenie;
         }
 
         public void AddWykaz(Wykaz wykaz)
@@ -173,6 +172,20 @@ namespace Zadanie1
                 }
 
             throw new Exception("Nie ma takiego wpisu");
+        }
+
+        public List<string> GetZdarzeniaLog()
+        {
+            return dataContext.ZdarzeniaLog;
+        }
+
+        private void WystapiloZdarzenie(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Add)
+            {
+                string[] wiadomosc = { "Dodano zdarzenie ", DateTime.Now.ToString()};
+                dataContext.ZdarzeniaLog.Add(string.Concat(wiadomosc));
+            }
         }
     }
 }

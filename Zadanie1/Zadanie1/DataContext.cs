@@ -11,11 +11,14 @@ namespace Zadanie1
             Katalogi = new Dictionary<int, Katalog>();
             Zdarzenia = new ObservableCollection<Zdarzenie>();
             OpisyStanu = new List<OpisStanu>();
+            ZdarzeniaLog = new List<string>();
         }
 
         public List<Wykaz> ElementyWykazu { get; }
         public Dictionary<int,Katalog> Katalogi { get; }
         public ObservableCollection<Zdarzenie> Zdarzenia { get; }
         public List<OpisStanu> OpisyStanu { get; }
+        public List<string> ZdarzeniaLog { get; }
+
     }
 }
