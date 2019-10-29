@@ -92,13 +92,20 @@ namespace DataRepositoryTest
             Assert.AreEqual(dr.GetAllKatalog().Count, 9);
         }
 
-        // testy CRUD zdarzenia
 
         [TestMethod]
         public void TestGetAllZdarzenie()
         {
             DataRepository dr = new DataRepository(new WypelnianieLosowymi());
             Assert.AreEqual(dr.GetAllZdarzenie().Count, 10);
+        }
+
+        [TestMethod]
+        public void TestGetZdarzenie()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieLosowymi());
+            Wypozyczenie wyp = new Wypozyczenie(dr.GetWykaz(1), dr.GetOpisStanu(dr.GetKatalog(1)), new DateTime(2019, 10, 20));
+            Assert.AreEqual(dr.GetZdarzenie(1).GetType(), wyp.GetType());
         }
 
         [TestMethod]

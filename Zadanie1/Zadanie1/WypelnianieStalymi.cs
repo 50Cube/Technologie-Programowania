@@ -39,13 +39,13 @@ namespace Zadanie1
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[10], 3, 45.0, new DateTime(2019, 09, 22)));
 
 
-            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[0], dataContext.OpisyStanu[0], new DateTime(2019, 10, 20)));
-            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[0], dataContext.OpisyStanu[3], new DateTime(2019, 10, 20)));
-            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[1], dataContext.OpisyStanu[1], new DateTime(2019, 10, 20)));
-            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[2], dataContext.OpisyStanu[2], new DateTime(2019, 10, 20)));
-            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[3], dataContext.OpisyStanu[4], new DateTime(2019, 10, 20)));
-            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[4], dataContext.OpisyStanu[5], new DateTime(2019, 10, 20)));
-            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[4], dataContext.OpisyStanu[8], new DateTime(2019, 10, 20)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[0], dataContext.OpisyStanu[0], new DateTime(2019, 10, 21)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[0], dataContext.OpisyStanu[3], new DateTime(2019, 10, 22)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[1], dataContext.OpisyStanu[1], new DateTime(2019, 10, 23)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[2], dataContext.OpisyStanu[2], new DateTime(2019, 10, 24)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[3], dataContext.OpisyStanu[4], new DateTime(2019, 10, 25)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[4], dataContext.OpisyStanu[5], new DateTime(2019, 10, 26)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[4], dataContext.OpisyStanu[8], new DateTime(2019, 10, 27)));
             dataContext.Zdarzenia.Add(new Zwrot(dataContext.ElementyWykazu[0], dataContext.OpisyStanu[3], new DateTime(2019, 11, 02)));
         }
     }

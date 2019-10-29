@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Zadanie1
         private readonly IDataRepository dataRepository;
         public DataService(IDataRepository dR)
         {
-            dataRepository = dR;
+            this.dataRepository = dR;
         }
 
         public void AddWykaz(Wykaz k)
@@ -49,6 +50,11 @@ namespace Zadanie1
            return dataRepository.GetKatalog(id);
         }
 
+        public Autor GetAutor(Katalog katalog)
+        {
+            return katalog.Autor;
+        }
+
         public Dictionary<int,Katalog> GetAllKatalog()
         {
            return dataRepository.GetAllKatalog();
@@ -57,6 +63,40 @@ namespace Zadanie1
         public void UpdateKatalog(int id, Autor autor, string tytul, int rok)
         {
             dataRepository.UpdateKatalog(id, autor, tytul, rok);
+        }
+
+        public Zdarzenie GetZdarzenie(int i)
+        {
+            return dataRepository.GetZdarzenie(i);
+        }
+
+        public ObservableCollection<Zdarzenie> GetAllZdarzenie()
+        {
+            return dataRepository.GetAllZdarzenie();
+        }
+
+        public ObservableCollection<Zdarzenie> GetZdarzeniaPomiedzy(DateTime Od, DateTime Do)
+        {
+            ObservableCollection<Zdarzenie> tmp = new ObservableCollection<Zdarzenie>();
+
+            foreach (Zdarzenie z in dataRepository.GetAllZdarzenie())
+                if (z.Data.CompareTo(Od) >= 0 && z.Data.CompareTo(Do) <= 0)
+                    tmp.Add(z);
+
+            return tmp;
+        }
+
+        public ObservableCollection<Wypozyczenie> GetWypozyczeniaDlaWykazu(Wykaz wykaz)
+        {
+            ObservableCollection<Wypozyczenie> tmp = new ObservableCollection<Wypozyczenie>();
+
+            foreach (Wypozyczenie w in dataRepository.GetAllZdarzenie().OfType<Wypozyczenie>())
+            {
+                if (w.Osoba.Id == wykaz.Id)
+                    tmp.Add(w);
+            }
+
+            return tmp;
         }
 
         public List<OpisStanu> GetAllOpisStanu()

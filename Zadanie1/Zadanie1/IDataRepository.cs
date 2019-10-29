@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Zadanie1
 {
@@ -16,6 +17,8 @@ namespace Zadanie1
         List<Wykaz> GetAllWykaz();
         Katalog GetKatalog(int id);
         OpisStanu GetOpisStanu(Katalog katalog);
+        ObservableCollection<Zdarzenie> GetAllZdarzenie();
+        Zdarzenie GetZdarzenie(int i);
         Wykaz GetWykaz(int id);
         void UpdateKatalog(int id, Autor autor, string tytul, int rok);
         bool UpdateOpisStanu(Katalog katalog, int ilosc, double cena, DateTime data);

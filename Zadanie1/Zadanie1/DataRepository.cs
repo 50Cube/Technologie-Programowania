@@ -105,10 +105,14 @@ namespace Zadanie1
         }
 
 
-        // CRUD dla Zdarzenie
         public ObservableCollection<Zdarzenie> GetAllZdarzenie()
         {
             return dataContext.Zdarzenia;
+        }
+
+        public Zdarzenie GetZdarzenie(int i)
+        {
+            return dataContext.Zdarzenia[i];
         }
 
         public void AddWypozyczenie(Wypozyczenie w)
