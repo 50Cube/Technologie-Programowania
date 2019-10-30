@@ -134,5 +134,9 @@ namespace Zadanie1
             dataRepository.AddZwrot(z);
         }
 
+        public List<string> GetZdarzeniaLog()
+        {
+            return dataRepository.GetZdarzeniaLog();
+        }
     }
 }

@@ -13,5 +13,10 @@ namespace Zadanie1
 
         public Wykaz Osoba { get; }
         public OpisStanu Ksiazka { get; }
+        public override string ToString()
+        {
+            string[] tekst = {"Wypozycznie IdOsoba:",Osoba.Id.ToString()," IdKsiazka:",Ksiazka.Katalog.Id.ToString()," ",Data.ToString()};
+            return string.Concat(tekst);
+        }
     }
 }
