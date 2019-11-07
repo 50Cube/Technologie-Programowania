@@ -52,8 +52,6 @@
     <Compile Include="OpisStanu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Klient.cs" />
-    <Compile Include="WypelnianieStalymi.cs" />
-    <Compile Include="WypelnianieLosowymi.cs" />
     <Compile Include="Wypozyczenie.cs" />
     <Compile Include="Zwrot.cs" />
   </ItemGroup>
