@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1;
 
-namespace DataServiceTest
+namespace Tests
 {
     [TestClass]
     public class DataServiceTest
