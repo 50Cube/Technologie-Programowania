@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Zadanie1;
 
-namespace Tests
+namespace Zadanie2
 {
-    public class WypelnianieStalymi : IWypelnianie
+    public class GrafObiektow : IWypelnianie
     {
-        public WypelnianieStalymi() { }
-        
-        public void Wypelnij (DataContext dataContext)
+        public void Wypelnij(DataContext dataContext)
         {
             dataContext.ElementyWykazu.Add(new Wykaz(1, "Emil", "Badura"));
             dataContext.ElementyWykazu.Add(new Wykaz(2, "Norbert", "Gierczak"));
@@ -15,17 +17,18 @@ namespace Tests
             dataContext.ElementyWykazu.Add(new Wykaz(4, "Jan", "Nowak"));
             dataContext.ElementyWykazu.Add(new Wykaz(5, "Kamil", "Chrabąszcz"));
 
-
-            dataContext.Katalogi.Add(1, new Katalog(1, new Autor("Henryk", "Sienkiewicz"), "Potop", 1886));
-            dataContext.Katalogi.Add(2, new Katalog(2, new Autor("Henryk", "Sienkiewicz"), "W pustyni i w puszczy", 1912));
+            Autor sienkiewicz = new Autor("Henryk", "Sienkiewicz");
+            Autor mickiewicz = new Autor("Adam", "Mickiewicz");
+            dataContext.Katalogi.Add(1, new Katalog(1, sienkiewicz, "Potop", 1886));
+            dataContext.Katalogi.Add(2, new Katalog(2, sienkiewicz, "W pustyni i w puszczy", 1912));
             dataContext.Katalogi.Add(3, new Katalog(3, new Autor("Bolesław", "Prus"), "Lalka", 1890));
             dataContext.Katalogi.Add(4, new Katalog(4, new Autor("Stefan", "Żeromski"), "Ludzie bezdomni", 1900));
             dataContext.Katalogi.Add(5, new Katalog(5, new Autor("Władysław", "Reymont"), "Chłopi", 1904));
             dataContext.Katalogi.Add(6, new Katalog(6, new Autor("Witold", "Gombrowicz"), "Ferdydurke", 1937));
-            dataContext.Katalogi.Add(7, new Katalog(7, new Autor("Adam", "Mickiewicz"), "Dziady", 1822));
+            dataContext.Katalogi.Add(7, new Katalog(7, mickiewicz, "Dziady", 1822));
             dataContext.Katalogi.Add(8, new Katalog(8, new Autor("Aleksander", "Fredro"), "Zemsta", 1838));
             dataContext.Katalogi.Add(9, new Katalog(9, new Autor("Eliza", "Orzeszkowa"), "Nad Niemnem", 1888));
-            dataContext.Katalogi.Add(10, new Katalog(10, new Autor("Zofia", "Nałkowska"), "Granica", 1935));
+            dataContext.Katalogi.Add(10, new Katalog(10, mickiewicz, "Pan Tadeusz", 1832));
 
 
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[1], 5, 20.0, new DateTime(2019, 10, 20)));
@@ -48,7 +51,13 @@ namespace Tests
             dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[4], dataContext.OpisyStanu[5], new DateTime(2019, 10, 26)));
             dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[4], dataContext.OpisyStanu[8], new DateTime(2019, 10, 27)));
             dataContext.Zdarzenia.Add(new Zwrot(dataContext.ElementyWykazu[0], dataContext.OpisyStanu[3], new DateTime(2019, 11, 02)));
-            
+            dataContext.Zdarzenia.Add(new Zwrot(dataContext.ElementyWykazu[0], dataContext.OpisyStanu[0], new DateTime(2019, 11, 12)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[1], dataContext.OpisyStanu[0], new DateTime(2019, 11, 14)));
+            dataContext.Zdarzenia.Add(new Zwrot(dataContext.ElementyWykazu[3], dataContext.OpisyStanu[4], new DateTime(2019, 11, 24)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[2], dataContext.OpisyStanu[4], new DateTime(2019, 12, 10)));
+            dataContext.Zdarzenia.Add(new Zwrot(dataContext.ElementyWykazu[2], dataContext.OpisyStanu[4], new DateTime(2019, 12, 12)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[4], dataContext.OpisyStanu[4], new DateTime(2019, 12, 13)));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[1], dataContext.OpisyStanu[4], new DateTime(2019, 12, 15)));
         }
     }
 }

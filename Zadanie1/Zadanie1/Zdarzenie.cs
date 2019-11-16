@@ -4,11 +4,11 @@ namespace Zadanie1
 {
     public abstract class Zdarzenie
     {
-        public DateTime Data;
-
         protected Zdarzenie(DateTime data)
         {
             this.Data = data;
         }
+
+        public DateTime Data { get; set; }
     }
 }

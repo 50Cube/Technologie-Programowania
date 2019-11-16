@@ -14,7 +14,7 @@ namespace Zadanie1
             this.Nazwisko = nazwisko;
         }
 
-        public string Imie { get; }
-        public string Nazwisko { get; }
+        public string Imie { get; set; }
+        public string Nazwisko { get; set; }
     }
 }

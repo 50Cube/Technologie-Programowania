@@ -15,8 +15,8 @@ namespace Zadanie1
             this.Ksiazka = ksiazka;
         }
 
-        public Wykaz Osoba { get; }
-        public OpisStanu Ksiazka { get; }
+        public Wykaz Osoba { get; set; }
+        public OpisStanu Ksiazka { get; set; }
         public override string ToString()
         {
             string[] tekst = { "Zwrot IdOsoba:", Osoba.Id.ToString(), " IdKsiazka:", Ksiazka.Katalog.Id.ToString(), " ", Data.ToString() };

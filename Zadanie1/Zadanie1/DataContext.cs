@@ -14,10 +14,10 @@ namespace Zadanie1
             ZdarzeniaLog = new List<string>();
         }
 
-        public List<Wykaz> ElementyWykazu { get; }
-        public Dictionary<int,Katalog> Katalogi { get; }
-        public ObservableCollection<Zdarzenie> Zdarzenia { get; }
-        public List<OpisStanu> OpisyStanu { get; }
+        public List<Wykaz> ElementyWykazu { get; set; }
+        public Dictionary<int,Katalog> Katalogi { get; set; }
+        public ObservableCollection<Zdarzenie> Zdarzenia { get; set; }
+        public List<OpisStanu> OpisyStanu { get; set; }
         public List<string> ZdarzeniaLog { get; }
 
     }

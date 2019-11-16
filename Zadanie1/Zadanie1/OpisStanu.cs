@@ -12,7 +12,7 @@ namespace Zadanie1
             this.DataZakupu = data;
         }
 
-        public Katalog Katalog { get; }
+        public Katalog Katalog { get; set; }
         public int Ilosc { get; set; }
         public double Cena { get; set; }
         public DateTime DataZakupu { get; set; }
