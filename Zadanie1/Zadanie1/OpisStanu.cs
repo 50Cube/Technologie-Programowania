@@ -1,8 +1,9 @@
 ﻿using System;
-
+using System.Runtime.Serialization;
 namespace Zadanie1
 {
-    public class OpisStanu
+    [Serializable]
+    public class OpisStanu : ISerializable
     {
         public OpisStanu(Katalog ksiazka, int ilosc, double cena, DateTime data)
         {
@@ -16,6 +17,14 @@ namespace Zadanie1
         public int Ilosc { get; set; }
         public double Cena { get; set; }
         public DateTime DataZakupu { get; set; }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Katalog", this.Katalog);
+            info.AddValue("Ilosc", this.Ilosc);
+            info.AddValue("Cena", this.Cena);
+            info.AddValue("DataZakupu", this.DataZakupu);
+        }
 
         public override string ToString()
         {

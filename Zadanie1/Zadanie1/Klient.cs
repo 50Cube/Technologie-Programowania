@@ -1,6 +1,10 @@
-﻿namespace Zadanie1
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace Zadanie1
 {
-    public class Wykaz
+    [Serializable]
+    public class Wykaz : ISerializable
     {
         public Wykaz(int id, string imie, string nazwisko)
         {
@@ -12,6 +16,13 @@
         public int Id { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Id", this.Id);
+            info.AddValue("Imie", this.Imie);
+            info.AddValue("Nazwisko", this.Nazwisko);
+        }
 
         public override string ToString()
         {

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GrafObiektow.cs" />
+    <Compile Include="OperacjeCSV.cs" />
     <Compile Include="OperacjeJSON.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

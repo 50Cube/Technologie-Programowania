@@ -1,8 +1,9 @@
 ﻿using System;
-
+using System.Runtime.Serialization;
 namespace Zadanie1
 {
-    public abstract class Zdarzenie
+    [Serializable]
+    public abstract class Zdarzenie : ISerializable
     {
         protected Zdarzenie(DateTime data)
         {
@@ -10,6 +11,11 @@ namespace Zadanie1
         }
 
         public DateTime Data { get; set; }
+
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Data", this.Data);
+        }
 
         public override string ToString()
         {
