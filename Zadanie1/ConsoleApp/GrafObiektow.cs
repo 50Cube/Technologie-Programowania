@@ -56,5 +56,31 @@ namespace Zadanie2
             dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[4], dataContext.OpisyStanu[4], new DateTime(2019, 12, 13)));
             dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.ElementyWykazu[1], dataContext.OpisyStanu[4], new DateTime(2019, 12, 15)));
         }
+
+        public string Wyswietl(DataContext data)
+        {
+            string tmp = "";
+            tmp += "\nElementy wykazu: \n";
+
+            foreach (Wykaz w in data.ElementyWykazu)
+                tmp += w.ToString() + "\n";
+
+            tmp += "\nKatalogi: \n";
+
+            foreach (Katalog k in data.Katalogi.Values)
+                tmp += k.ToString() + "\n";
+
+            tmp += "\nOpisy stanu: \n";
+
+            foreach (OpisStanu o in data.OpisyStanu)
+                tmp += o.ToString() + "\n";
+
+            tmp += "\nZdarzenia: \n";
+
+            foreach (Zdarzenie z in data.Zdarzenia)
+                tmp += z.ToString() + "\n";
+
+            return tmp;
+        }
     }
 }

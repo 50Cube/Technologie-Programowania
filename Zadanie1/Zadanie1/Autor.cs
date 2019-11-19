@@ -16,5 +16,7 @@ namespace Zadanie1
 
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
+
+        public override string ToString() => "Imie: " + this.Imie + ", Nazwisko: " + this.Nazwisko;
     }
 }

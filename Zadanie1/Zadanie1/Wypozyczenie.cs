@@ -15,7 +15,7 @@ namespace Zadanie1
         public OpisStanu Ksiazka { get; set; }
         public override string ToString()
         {
-            string[] tekst = {"Wypozycznie IdOsoba:",Osoba.Id.ToString()," IdKsiazka:",Ksiazka.Katalog.Id.ToString()," ",Data.ToString()};
+            string[] tekst = {"Wypozycznie ID Osoby: ",Osoba.Id.ToString(),", ID Ksiazki: ",Ksiazka.Katalog.Id.ToString(),", data wypożyczenia: ",Data.ToString()};
             return string.Concat(tekst);
         }
     }

@@ -16,5 +16,10 @@ namespace Zadanie1
         public int Ilosc { get; set; }
         public double Cena { get; set; }
         public DateTime DataZakupu { get; set; }
+
+        public override string ToString()
+        {
+            return "Katalog o ID: " + this.Katalog.Id + ", ilość sztuk: " + this.Ilosc + ", cena: " + this.Cena + ", data zakupu: " + this.DataZakupu;
+        }
     }
 }
