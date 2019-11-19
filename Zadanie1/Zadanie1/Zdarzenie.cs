@@ -10,11 +10,16 @@ namespace Zadanie1
             this.Data = data;
         }
 
+        protected Zdarzenie(SerializationInfo info, StreamingContext context)
+        {
+            this.Data = (DateTime)info.GetValue("Data", typeof(DateTime));
+        }
+
         public DateTime Data { get; set; }
 
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Data", this.Data);
+            info.AddValue("Data", this.Data, typeof(DateTime));
         }
 
         public override string ToString()
