@@ -14,5 +14,10 @@
         public Autor Autor { get; set; }
         public string Tytul { get; set; }
         public int RokWydania { get; set; }
+
+        public override string ToString()
+        {
+            return "ID: " + this.Id + ", Autor: " + this.Autor.ToString() + ", tytul: " + this.Tytul + ", rok wydania: " + this.RokWydania;
+        }
     }
 }
