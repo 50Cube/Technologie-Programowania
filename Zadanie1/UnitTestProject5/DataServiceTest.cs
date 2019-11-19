@@ -82,15 +82,5 @@ namespace Tests
             int iloscPo = dS.GetOpisStanu(k).Ilosc;
             Assert.AreEqual(iloscPo - 1, iloscPrzed);
         }
-
-        [TestMethod]
-        public void TestGetZdarzeniaLog()
-        {
-            DataRepository dR = new DataRepository(new WypelnianieStalymi());
-            Wypozyczenie wyp = new Wypozyczenie(dR.GetWykaz(1), dR.GetOpisStanu(dR.GetKatalog(1)), new DateTime(2019, 10, 20));
-            dR.AddWypozyczenie(wyp);
-            DataService dS = new DataService(dR);
-            Assert.AreEqual(1, dS.GetZdarzeniaLog().Count);
-        }
     }
 }
