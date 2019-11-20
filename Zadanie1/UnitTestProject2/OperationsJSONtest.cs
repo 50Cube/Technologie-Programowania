@@ -54,7 +54,7 @@ namespace Tests2
             OperacjeJSON.Wczytaj(dataContext2);
 
             Assert.AreEqual(dataContext.OpisyStanu[0].Cena, dataContext2.OpisyStanu[0].Cena);
-            //Assert.AreEqual(dataContext.OpisyStanu[0].DataZakupu, dataContext2.OpisyStanu[0].DataZakupu);
+            Assert.AreEqual(dataContext.OpisyStanu[0].DataZakupu, dataContext2.OpisyStanu[0].DataZakupu);
             Assert.AreEqual(dataContext.OpisyStanu[0].Ilosc, dataContext2.OpisyStanu[0].Ilosc);
             Assert.AreEqual(dataContext.OpisyStanu[0].Katalog.Id, dataContext2.OpisyStanu[0].Katalog.Id);
         }
