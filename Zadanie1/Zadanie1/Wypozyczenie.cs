@@ -16,9 +16,13 @@ namespace Zadanie1
         public Wypozyczenie(SerializationInfo info, StreamingContext context)
             :base(info,context)
         {
-            this.Osoba = (Wykaz)info.GetValue("Osoba", typeof(Wykaz));
-            this.Ksiazka = (OpisStanu)info.GetValue("Ksiazka", typeof(OpisStanu));
+            this.opisID = (int)info.GetValue("OpisID", typeof(int));
+            this.klientID = (int)info.GetValue("KlientID", typeof(int));
+            //           this.Osoba = (Wykaz)info.GetValue("Osoba", typeof(Wykaz));
+            //          this.Ksiazka = (OpisStanu)info.GetValue("Ksiazka", typeof(OpisStanu));
         }
+        public int klientID;
+        public int opisID;
         public Wykaz Osoba { get; set; }
         public OpisStanu Ksiazka { get; set; }
         public override string ToString()
@@ -30,8 +34,11 @@ namespace Zadanie1
         override public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("Osoba", this.Osoba,typeof(Wykaz));
-            info.AddValue("Ksiazka", this.Ksiazka,typeof(OpisStanu));
+            //       info.AddValue("Osoba", this.Osoba,typeof(Wykaz));
+            //       info.AddValue("Ksiazka", this.Ksiazka,typeof(OpisStanu));
+            info.AddValue("KlientID", this.Osoba.Id, typeof(int));
+            info.AddValue("OpisID", this.Ksiazka.Katalog.Id, typeof(int));
+
         }
     }
 }
