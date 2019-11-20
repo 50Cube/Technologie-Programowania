@@ -14,12 +14,13 @@ namespace Zadanie1
         }
         public OpisStanu(SerializationInfo info, StreamingContext context)
         {
-            this.Katalog = (Katalog)info.GetValue("Katalog", typeof(Katalog));
+            this.KatalogID = (int)info.GetValue("KatalogID", typeof(int)); //Katalog ustawiony pozniej            
             this.Ilosc = (int)info.GetValue("Ilosc", typeof(int));
             this.Cena = (double)info.GetValue("Cena", typeof(double));
-            this.DataZakupu = (DateTime)info.GetValue("DataZakupu", typeof(DateTime));
+      //      this.DataZakupu = (DateTime)info.GetValue("DataZakupu", typeof(DateTime));
 
         }
+        public int KatalogID { get; set;}
         public Katalog Katalog { get; set; }
         public int Ilosc { get; set; }
         public double Cena { get; set; }
@@ -27,10 +28,10 @@ namespace Zadanie1
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Katalog", this.Katalog,typeof(Katalog));
+            info.AddValue("KatalogID", this.Katalog.Id,typeof(int));
             info.AddValue("Ilosc", this.Ilosc,typeof(int));
             info.AddValue("Cena", this.Cena,typeof(double));
-            info.AddValue("DataZakupu", this.DataZakupu,typeof(DateTime));
+   //         info.AddValue("DataZakupu", this.DataZakupu,typeof(DateTime));
         }
 
         public override string ToString()

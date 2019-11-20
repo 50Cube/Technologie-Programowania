@@ -100,16 +100,17 @@ namespace Zadanie2
             }
             fileKatalog.Close();
 
-            //CSVFormatter<OpisStanu> formatterCSVopis = new CSVFormatter<OpisStanu>();
-            //StreamReader fileOpis = new System.IO.StreamReader("OpisyStanu.csv");
-            //while ((line = fileOpis.ReadLine()) != null)
-            //{
-            //    byte[] byteArray = Encoding.ASCII.GetBytes(line);
-            //    MemoryStream stream = new MemoryStream(byteArray);
-            //    OpisStanu obj = (OpisStanu)formatterCSVopis.Deserialize(stream);
-            //    data.OpisyStanu.Add(obj);
-            //}
-            //fileOpis.Close();
+            CSVFormatter<OpisStanu> formatterCSVopis = new CSVFormatter<OpisStanu>();
+            StreamReader fileOpis = new System.IO.StreamReader("OpisyStanu.csv");
+            while ((line = fileOpis.ReadLine()) != null)
+            {
+               byte[] byteArray = Encoding.ASCII.GetBytes(line);
+                MemoryStream stream = new MemoryStream(byteArray);
+                OpisStanu obj = (OpisStanu)formatterCSVopis.Deserialize(stream);
+                obj.Katalog = data.Katalogi[obj.KatalogID];
+                data.OpisyStanu.Add(obj);
+            }
+            fileOpis.Close();
         }
     }
 }

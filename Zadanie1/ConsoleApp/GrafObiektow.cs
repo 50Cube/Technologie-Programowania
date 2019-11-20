@@ -32,7 +32,7 @@ namespace Zadanie2
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[2], 25, 30.0, new DateTime(2019, 10, 22)));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[3], 10, 50.0, new DateTime(2019, 10, 21)));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[4], 1, 25.0, new DateTime(2019, 10, 16)));
-            dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[5], 0, 29.99, new DateTime(2019, 10, 18)));
+            dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[5], 0, 29.0, new DateTime(2019, 10, 18)));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[6], 30, 20.0, new DateTime(2019, 09, 28)));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[7], 100, 10.0, new DateTime(2019, 10, 03)));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[8], 2, 80.0, new DateTime(2019, 10, 12)));

@@ -22,7 +22,7 @@ namespace Zadanie2
             SerializationInfo info = new SerializationInfo(createdObject.GetType(), new FormatterConverter());
             foreach (string s in separatedKeyValues)
             {
-                string[] singleKeyValue = s.Split(':');
+                string[] singleKeyValue = s.Split(';');
                 info.AddValue(singleKeyValue[0], singleKeyValue[1]);
             }
             createdObject = (T)Activator.CreateInstance(typeof(T),info,Context);
@@ -42,7 +42,7 @@ namespace Zadanie2
                 foreach (SerializationEntry entry in si)
                 {
                     sw.Write(entry.Name);
-                    sw.Write(":");
+                    sw.Write(";");
                     sw.Write(entry.Value);
                     sw.Write(",");
                 }
