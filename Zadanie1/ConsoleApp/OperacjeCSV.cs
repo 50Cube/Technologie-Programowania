@@ -12,7 +12,6 @@ namespace Zadanie2
 {
     public class OperacjeCSV 
     {
-        private static readonly string Delimiter = ",";
         private static StringBuilder stringBuilder = new StringBuilder();
 
         public static void Zapisz(DataContext data)
@@ -20,7 +19,7 @@ namespace Zadanie2
             foreach (Wykaz w in data.ElementyWykazu)
             {
                 Stream s = new FileStream("Wykazy.csv", FileMode.Append, FileAccess.Write);
-                CSVFormatter formatter = new CSVFormatter();
+                CSVFormatter<Wykaz> formatter = new CSVFormatter<Wykaz>();
                 formatter.Serialize(s,w);
                 s.Close();
             }
@@ -46,7 +45,28 @@ namespace Zadanie2
 
         public static void Wczytaj(DataContext data)
         {
-            
+            CSVFormatter<Wykaz> formatterCSV = new CSVFormatter<Wykaz>();
+            string line;
+            StreamReader file = new System.IO.StreamReader("Wykazy.csv");
+            while ((line = file.ReadLine()) != null)
+            {
+                Wykaz obj = (Wykaz)formatterCSV.Deserialize(GenerateStreamFromString(line));
+                data.ElementyWykazu.Add(obj);
+            }
+
+            file.Close();
+           
+
+        }
+
+        private static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }

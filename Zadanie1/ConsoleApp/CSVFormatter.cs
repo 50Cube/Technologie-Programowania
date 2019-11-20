@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.IO;
+using System.Reflection;
 
 namespace Zadanie2
 {
-    class CSVFormatter : IFormatter
+    class CSVFormatter<T> : IFormatter where T: class
     {
         public ISurrogateSelector SurrogateSelector { get; set; }
         public SerializationBinder Binder { get; set; }
@@ -16,23 +17,23 @@ namespace Zadanie2
 
         public object Deserialize(Stream serializationStream)
         {
-            using (StreamReader sr = new StreamReader(serializationStream))
+            StreamReader sr = new StreamReader(serializationStream);
+            string line = "";
+            line = sr.ReadLine();
+            line = line.Remove(line.Length - 1);
+            T obj = (T)FormatterServices.GetUninitializedObject(typeof(T));
+            string[] separatedKeyValues = line.Split(',');
+            SerializationInfo info = new SerializationInfo(obj.GetType(), new FormatterConverter());
+            foreach (string s in separatedKeyValues)
             {
-                object deserializedObject = null;
-                string line = "";
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] separatedKeyValues = line.Split(',');
-                    SerializationInfo info = new SerializationInfo(deserializedObject.GetType(), new FormatterConverter());
-                    foreach (string s in separatedKeyValues)
-                    {
-                        string[] singleKeyValue = s.Split(':');
-                        info.AddValue(singleKeyValue[0], singleKeyValue[1]);
-                    }
-
-                }
-                return deserializedObject;
+                    string[] singleKeyValue = s.Split(':');
+                    info.AddValue(singleKeyValue[0], singleKeyValue[1]);
             }
+            var constructor = obj.GetType().GetConstructor(BindingFlags.Instance | BindingFlags.Public, null, new[] { typeof(SerializationInfo), typeof(StreamingContext) }, null);
+            constructor.Invoke(obj, new object[] {info, Context });
+            sr.Dispose();
+            return obj;
+            
         }
 
         public void Serialize(Stream serializationStream, object graph)
@@ -52,6 +53,7 @@ namespace Zadanie2
                     sw.Write(",");
                 }
                 sw.WriteLine("");
+                sw.Flush();
             }
         }
     }
