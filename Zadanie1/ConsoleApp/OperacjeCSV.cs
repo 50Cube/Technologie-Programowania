@@ -50,23 +50,13 @@ namespace Zadanie2
             StreamReader file = new System.IO.StreamReader("Wykazy.csv");
             while ((line = file.ReadLine()) != null)
             {
-                Wykaz obj = (Wykaz)formatterCSV.Deserialize(GenerateStreamFromString(line));
+                byte[] byteArray = Encoding.ASCII.GetBytes(line);
+                MemoryStream stream = new MemoryStream(byteArray);
+                Wykaz obj = (Wykaz)formatterCSV.Deserialize(stream);
                 data.ElementyWykazu.Add(obj);
             }
 
             file.Close();
-           
-
-        }
-
-        private static Stream GenerateStreamFromString(string s)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
         }
     }
 }
