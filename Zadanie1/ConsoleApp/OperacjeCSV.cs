@@ -46,14 +46,27 @@ namespace Zadanie2
                 s.Close();
             }
 
-            if (File.Exists("Zdarzenia.csv"))
-                File.Delete("Zdarzenia.csv");
+            if (File.Exists("Zwroty.csv"))
+                File.Delete("Zwroty.csv");
+            if (File.Exists("Wypozyczenia.csv"))
+                File.Delete("Wypozyczenia.csv");
             foreach (Zdarzenie z in data.Zdarzenia)
             {
-                Stream s = new FileStream("Zdarzenia.csv", FileMode.Append, FileAccess.Write);
-                CSVFormatter<Zdarzenie> formatter = new CSVFormatter<Zdarzenie>();
-                formatter.Serialize(s, z);
+                Stream s = new FileStream("Zwroty.csv", FileMode.Append, FileAccess.Write);
+                Stream s2 = new FileStream("Wypozyczenia.csv", FileMode.Append, FileAccess.Write);
+
+                CSVFormatter<Zwrot> formatter = new CSVFormatter<Zwrot>();
+                CSVFormatter<Wypozyczenie> formatter2 = new CSVFormatter<Wypozyczenie>();
+                if(z.GetType() == typeof(Zwrot))
+                {
+                    formatter.Serialize(s, z);
+                }
+                else
+                {
+                    formatter.Serialize(s2, z);
+                }
                 s.Close();
+                s2.Close();
             }
             /*foreach (Wykaz w in data.ElementyWykazu)
                 stringBuilder.AppendLine(string.Join(Delimiter,w.Id, w.Imie, w.Nazwisko));
@@ -111,6 +124,61 @@ namespace Zadanie2
                 data.OpisyStanu.Add(obj);
             }
             fileOpis.Close();
+
+            CSVFormatter<Zwrot> formatterCSVzwrot = new CSVFormatter<Zwrot>();
+            StreamReader fileZwrot = new System.IO.StreamReader("Zwroty.csv");
+            while ((line = fileZwrot.ReadLine()) != null)
+            {
+                byte[] byteArray = Encoding.ASCII.GetBytes(line);
+                MemoryStream stream = new MemoryStream(byteArray);
+                Zwrot obj = (Zwrot)formatterCSVzwrot.Deserialize(stream);
+                foreach(OpisStanu os in data.OpisyStanu)
+                {
+                    if (os.Katalog.Id == obj.opisID)
+                    {
+                        obj.Ksiazka = os;
+                        break;
+                    }
+                }
+                foreach (Wykaz os in data.ElementyWykazu)
+                {
+                    if (os.Id == obj.klientID)
+                    {
+                        obj.Osoba = os;
+                        break;
+                    }
+                }
+                data.Zdarzenia.Add(obj);
+            }
+            fileZwrot.Close();
+            
+            CSVFormatter<Wypozyczenie> formatterCSVWypozyczenie = new CSVFormatter<Wypozyczenie>();
+            StreamReader fileWypozyczenie = new System.IO.StreamReader("Wypozyczenia.csv");
+            while ((line = fileWypozyczenie.ReadLine()) != null)
+            {
+                byte[] byteArray = Encoding.ASCII.GetBytes(line);
+                MemoryStream stream = new MemoryStream(byteArray);
+                Wypozyczenie obj = (Wypozyczenie)formatterCSVWypozyczenie.Deserialize(stream);
+                foreach (OpisStanu os in data.OpisyStanu)
+                {
+                    if (os.Katalog.Id == obj.opisID)
+                    {
+                        obj.Ksiazka = os;
+                        break;
+                    }
+                }
+                foreach (Wykaz os in data.ElementyWykazu)
+                {
+                    if (os.Id == obj.klientID)
+                    {
+                        obj.Osoba = os;
+                        break;
+                    }
+                }
+                data.Zdarzenia.Add(obj);
+            }
+            fileWypozyczenie.Close();
+            
         }
     }
 }
