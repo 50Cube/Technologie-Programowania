@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSVFormatter.cs" />
     <Compile Include="GrafObiektow.cs" />
     <Compile Include="OperacjeCSV.cs" />
     <Compile Include="OperacjeJSON.cs" />
