@@ -77,18 +77,39 @@ namespace Zadanie2
 
         public static void Wczytaj(DataContext data)
         {
-            CSVFormatter<Wykaz> formatterCSV = new CSVFormatter<Wykaz>();
+            CSVFormatter<Wykaz> formatterCSVwykaz = new CSVFormatter<Wykaz>();
             string line;
-            StreamReader file = new System.IO.StreamReader("Wykazy.csv");
-            while ((line = file.ReadLine()) != null)
+            StreamReader fileWykaz = new System.IO.StreamReader("Wykazy.csv");
+            while ((line = fileWykaz.ReadLine()) != null)
             {
                 byte[] byteArray = Encoding.ASCII.GetBytes(line);
                 MemoryStream stream = new MemoryStream(byteArray);
-                Wykaz obj = (Wykaz)formatterCSV.Deserialize(stream);
+                Wykaz obj = (Wykaz)formatterCSVwykaz.Deserialize(stream);
                 data.ElementyWykazu.Add(obj);
             }
+            fileWykaz.Close();
 
-            file.Close();
+            CSVFormatter<Katalog> formatterCSVkatalog = new CSVFormatter<Katalog>();
+            StreamReader fileKatalog = new System.IO.StreamReader("Katalogi.csv");
+            while ((line = fileKatalog.ReadLine()) != null)
+            {
+                byte[] byteArray = Encoding.ASCII.GetBytes(line);
+                MemoryStream stream = new MemoryStream(byteArray);
+                Katalog obj = (Katalog)formatterCSVkatalog.Deserialize(stream);
+                data.Katalogi.Add(obj.Id,obj);
+            }
+            fileKatalog.Close();
+
+            //CSVFormatter<OpisStanu> formatterCSVopis = new CSVFormatter<OpisStanu>();
+            //StreamReader fileOpis = new System.IO.StreamReader("OpisyStanu.csv");
+            //while ((line = fileOpis.ReadLine()) != null)
+            //{
+            //    byte[] byteArray = Encoding.ASCII.GetBytes(line);
+            //    MemoryStream stream = new MemoryStream(byteArray);
+            //    OpisStanu obj = (OpisStanu)formatterCSVopis.Deserialize(stream);
+            //    data.OpisyStanu.Add(obj);
+            //}
+            //fileOpis.Close();
         }
     }
 }
