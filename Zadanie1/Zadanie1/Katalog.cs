@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
-
+using Newtonsoft.Json;
 namespace Zadanie1
 {
     [Serializable]
     public class Katalog : ISerializable
     {
+        [JsonConstructor]
         public Katalog(int id, Autor autor, string tytul, int rokWydania)
         {
             this.Id = id;
