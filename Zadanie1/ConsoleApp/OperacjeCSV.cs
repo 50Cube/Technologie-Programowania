@@ -16,11 +16,43 @@ namespace Zadanie2
 
         public static void Zapisz(DataContext data)
         {
+            if (File.Exists("Wykazy.csv"))
+                File.Delete("Wykazy.csv");
             foreach (Wykaz w in data.ElementyWykazu)
             {
                 Stream s = new FileStream("Wykazy.csv", FileMode.Append, FileAccess.Write);
                 CSVFormatter<Wykaz> formatter = new CSVFormatter<Wykaz>();
                 formatter.Serialize(s,w);
+                s.Close();
+            }
+
+            if (File.Exists("Katalogi.csv"))
+                File.Delete("Katalogi.csv");
+            foreach (Katalog k in data.Katalogi.Values)
+            {
+                Stream s = new FileStream("Katalogi.csv", FileMode.Append, FileAccess.Write);
+                CSVFormatter<Katalog> formatter = new CSVFormatter<Katalog>();
+                formatter.Serialize(s, k);
+                s.Close();
+            }
+
+            if (File.Exists("OpisyStanu.csv"))
+                File.Delete("OpisyStanu.csv");
+            foreach (OpisStanu o in data.OpisyStanu)
+            {
+                Stream s = new FileStream("OpisyStanu.csv", FileMode.Append, FileAccess.Write);
+                CSVFormatter<OpisStanu> formatter = new CSVFormatter<OpisStanu>();
+                formatter.Serialize(s, o);
+                s.Close();
+            }
+
+            if (File.Exists("Zdarzenia.csv"))
+                File.Delete("Zdarzenia.csv");
+            foreach (Zdarzenie z in data.Zdarzenia)
+            {
+                Stream s = new FileStream("Zdarzenia.csv", FileMode.Append, FileAccess.Write);
+                CSVFormatter<Zdarzenie> formatter = new CSVFormatter<Zdarzenie>();
+                formatter.Serialize(s, z);
                 s.Close();
             }
             /*foreach (Wykaz w in data.ElementyWykazu)

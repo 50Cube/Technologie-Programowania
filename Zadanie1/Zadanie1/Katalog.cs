@@ -17,7 +17,7 @@ namespace Zadanie1
         public Katalog(SerializationInfo info, StreamingContext context)
         {
             this.Id = (int)info.GetValue("Id", typeof(int));
-            this.Autor = (Autor)info.GetValue("Autor", typeof(Autor));
+            this.Autor = new Autor(info.GetString("Imie"), info.GetString("Nazwisko"));
             this.Tytul = (string)info.GetValue("Tytul", typeof(string));
             this.RokWydania = (int)info.GetValue("RokWydania", typeof(int));
         }
@@ -29,7 +29,8 @@ namespace Zadanie1
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Id", this.Id, typeof(int));
-            info.AddValue("Autor", this.Autor, typeof(Autor));
+            info.AddValue("Imie", this.Autor.Imie, typeof(string));
+            info.AddValue("Nazwisko", this.Autor.Nazwisko, typeof(string));
             info.AddValue("Tytul", this.Tytul,typeof(string));
             info.AddValue("RokWydania", this.RokWydania,typeof(int));
         }
