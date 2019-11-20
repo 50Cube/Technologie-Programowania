@@ -46,16 +46,21 @@ namespace Zadanie2
                         break;
                     case 2:
                         OperacjeJSON.Zapisz(dataContext);
-                        Console.WriteLine("Pomyślnie zapisano dane do pliku");
+                        Console.WriteLine("Pomyślnie zapisano dane do pliku .json");
                         break;
                     case 3:
                         dataContext = new DataContext();
                         OperacjeJSON.Wczytaj(dataContext);
-                        Console.WriteLine("Pomyślnie wczytane dane z pliku");
+                        Console.WriteLine("Pomyślnie wczytane dane z pliku .json");
                         break;
                     case 4:
+                        OperacjeCSV.Zapisz(dataContext);
+                        Console.WriteLine("Pomyślnie zapisano dane do pliku .csv");
                         break;
                     case 5:
+                        dataContext = new DataContext();
+                        OperacjeCSV.Wczytaj(dataContext);
+                        Console.WriteLine("Pomyślnie wczytane dane z pliku .csv");
                         break;
                     case 6:
                         Console.WriteLine(grafObiektow.Wyswietl(dataContext));
