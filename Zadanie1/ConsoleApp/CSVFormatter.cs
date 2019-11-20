@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.IO;
-using System.Reflection;
+
 
 namespace Zadanie2
 {
@@ -21,19 +17,17 @@ namespace Zadanie2
             string line = "";
             line = sr.ReadLine();
             line = line.Remove(line.Length - 1);
-            T obj = (T)FormatterServices.GetUninitializedObject(typeof(T));
+            T createdObject = (T)FormatterServices.GetUninitializedObject(typeof(T));
             string[] separatedKeyValues = line.Split(',');
-            SerializationInfo info = new SerializationInfo(obj.GetType(), new FormatterConverter());
+            SerializationInfo info = new SerializationInfo(createdObject.GetType(), new FormatterConverter());
             foreach (string s in separatedKeyValues)
             {
-                    string[] singleKeyValue = s.Split(':');
-                    info.AddValue(singleKeyValue[0], singleKeyValue[1]);
+                string[] singleKeyValue = s.Split(':');
+                info.AddValue(singleKeyValue[0], singleKeyValue[1]);
             }
-            var constructor = obj.GetType().GetConstructor(BindingFlags.Instance | BindingFlags.Public, null, new[] { typeof(SerializationInfo), typeof(StreamingContext) }, null);
-            constructor.Invoke(obj, new object[] {info, Context });
+            createdObject = (T)Activator.CreateInstance(typeof(T),info,Context);
             sr.Dispose();
-            return obj;
-            
+            return createdObject;
         }
 
         public void Serialize(Stream serializationStream, object graph)
