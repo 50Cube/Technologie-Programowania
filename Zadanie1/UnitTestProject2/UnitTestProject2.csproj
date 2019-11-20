@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OperationsCSVtest.cs" />
     <Compile Include="OperationsJSONtest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

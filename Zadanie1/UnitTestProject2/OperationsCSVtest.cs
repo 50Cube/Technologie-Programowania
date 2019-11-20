@@ -6,7 +6,7 @@ using Zadanie2;
 namespace Tests2
 {
     [TestClass]
-    public class OperationsJSONtest
+    public class OperationsCSVtest
     {
         [TestMethod]
         public void TestSerializeWykaz()
@@ -16,8 +16,8 @@ namespace Tests2
             GrafObiektow graf = new GrafObiektow();
             graf.Wypelnij(dataContext);
 
-            OperacjeJSON.Zapisz(dataContext);
-            OperacjeJSON.Wczytaj(dataContext2);
+            OperacjeCSV.Zapisz(dataContext);
+            OperacjeCSV.Wczytaj(dataContext2);
 
             Assert.AreEqual(dataContext.ElementyWykazu[1].Id, dataContext2.ElementyWykazu[1].Id);
             Assert.AreEqual(dataContext.ElementyWykazu[1].Imie, dataContext2.ElementyWykazu[1].Imie);
@@ -32,8 +32,8 @@ namespace Tests2
             GrafObiektow graf = new GrafObiektow();
             graf.Wypelnij(dataContext);
 
-            OperacjeJSON.Zapisz(dataContext);
-            OperacjeJSON.Wczytaj(dataContext2);
+            OperacjeCSV.Zapisz(dataContext);
+            OperacjeCSV.Wczytaj(dataContext2);
 
             Assert.AreEqual(dataContext.Katalogi[1].Autor.Imie, dataContext2.Katalogi[1].Autor.Imie);
             Assert.AreEqual(dataContext.Katalogi[1].Autor.Nazwisko, dataContext2.Katalogi[1].Autor.Nazwisko);
@@ -50,13 +50,13 @@ namespace Tests2
             GrafObiektow graf = new GrafObiektow();
             graf.Wypelnij(dataContext);
 
-            OperacjeJSON.Zapisz(dataContext);
-            OperacjeJSON.Wczytaj(dataContext2);
+            OperacjeCSV.Zapisz(dataContext);
+            OperacjeCSV.Wczytaj(dataContext2);
 
-            Assert.AreEqual(dataContext.OpisyStanu[0].Cena, dataContext2.OpisyStanu[0].Cena);
-            //Assert.AreEqual(dataContext.OpisyStanu[0].DataZakupu, dataContext2.OpisyStanu[0].DataZakupu);
-            Assert.AreEqual(dataContext.OpisyStanu[0].Ilosc, dataContext2.OpisyStanu[0].Ilosc);
-            Assert.AreEqual(dataContext.OpisyStanu[0].Katalog.Id, dataContext2.OpisyStanu[0].Katalog.Id);
+            Assert.AreEqual(dataContext.OpisyStanu[1].Katalog.Id, dataContext2.OpisyStanu[1].Katalog.Id);
+            Assert.AreEqual(dataContext.OpisyStanu[1].KatalogID, dataContext2.OpisyStanu[1].KatalogID);
+            Assert.AreEqual(dataContext.OpisyStanu[1].Ilosc, dataContext2.OpisyStanu[1].Ilosc);
+            //Assert.AreEqual(dataContext.OpisyStanu[1].DataZakupu, dataContext2.OpisyStanu[1].DataZakupu);
         }
 
         [TestMethod]
@@ -67,11 +67,11 @@ namespace Tests2
             GrafObiektow graf = new GrafObiektow();
             graf.Wypelnij(dataContext);
 
-            OperacjeJSON.Zapisz(dataContext);
-            OperacjeJSON.Wczytaj(dataContext2);
+            OperacjeCSV.Zapisz(dataContext);
+            OperacjeCSV.Wczytaj(dataContext2);
 
-            Assert.AreEqual(dataContext.Zdarzenia[1].GetType(), dataContext2.Zdarzenia[1].GetType());
-            Assert.AreEqual(dataContext.Zdarzenia[1].Data, dataContext2.Zdarzenia[1].Data);
+            Assert.AreEqual(dataContext.Zdarzenia[2].GetType(), dataContext2.Zdarzenia[2].GetType());
+            Assert.AreEqual(dataContext.Zdarzenia[2].Data, dataContext2.Zdarzenia[2].Data);
         }
     }
 }

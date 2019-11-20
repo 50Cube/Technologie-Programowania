@@ -19,8 +19,12 @@ namespace Zadanie1
 
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+<<<<<<< Updated upstream
             //info.AddValue("Rodzaj", this.GetType(), typeof(String));
             //info.AddValue("Data", this.Data, typeof(DateTime));
+=======
+            info.AddValue("Data", this.Data, typeof(DateTime));
+>>>>>>> Stashed changes
         }
 
         public override string ToString()
