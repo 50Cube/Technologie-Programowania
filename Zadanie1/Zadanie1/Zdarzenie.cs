@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace Zadanie1
 {
     [Serializable]
     public abstract class Zdarzenie : ISerializable
     {
-        [JsonConstructor]
         protected Zdarzenie(DateTime data)
         {
             this.Data = data;

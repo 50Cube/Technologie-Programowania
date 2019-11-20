@@ -54,9 +54,9 @@ namespace Tests2
             OperacjeCSV.Wczytaj(dataContext2);
 
             Assert.AreEqual(dataContext.OpisyStanu[1].Katalog.Id, dataContext2.OpisyStanu[1].Katalog.Id);
- //           Assert.AreEqual(dataContext.OpisyStanu[1].KatalogID, dataContext2.OpisyStanu[1].KatalogID);
+            Assert.AreEqual(dataContext.OpisyStanu[1].KatalogID, dataContext2.OpisyStanu[1].KatalogID);
             Assert.AreEqual(dataContext.OpisyStanu[1].Ilosc, dataContext2.OpisyStanu[1].Ilosc);
-  //          Assert.AreEqual(dataContext.OpisyStanu[1].DataZakupu, dataContext2.OpisyStanu[1].DataZakupu);
+            Assert.AreEqual(dataContext.OpisyStanu[1].DataZakupu, dataContext2.OpisyStanu[1].DataZakupu);
         }
 
         [TestMethod]
@@ -70,8 +70,7 @@ namespace Tests2
             OperacjeCSV.Zapisz(dataContext);
             OperacjeCSV.Wczytaj(dataContext2);
 
-            Assert.AreEqual(dataContext.Zdarzenia[2].GetType(), dataContext2.Zdarzenia[2].GetType());
-            Assert.AreEqual(dataContext.Zdarzenia[2].Data, dataContext2.Zdarzenia[2].Data);
+            Assert.AreEqual(dataContext.Zdarzenia.Count, dataContext2.Zdarzenia.Count);
         }
     }
 }

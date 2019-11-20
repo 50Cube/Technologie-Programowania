@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 namespace Zadanie1
 {
     [Serializable]
     public class OpisStanu : ISerializable
     {
-
-        [JsonConstructor]
         public OpisStanu(Katalog ksiazka, int ilosc, double cena, DateTime data)
         {
             this.Katalog = ksiazka;

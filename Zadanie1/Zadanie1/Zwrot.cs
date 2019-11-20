@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace Zadanie1
 {
     [Serializable]
     public class Zwrot : Zdarzenie, ISerializable
     {
-        [JsonConstructor]
         public Zwrot(Wykaz osoba, OpisStanu ksiazka, DateTime zwrot)
             : base(zwrot)
         {

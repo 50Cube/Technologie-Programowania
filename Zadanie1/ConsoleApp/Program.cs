@@ -25,7 +25,7 @@ namespace Zadanie2
                     Console.WriteLine("4 - zapisz dane do pliku CSV");
                     Console.WriteLine("5 - wczytaj dane z pliku CSV");
                     Console.WriteLine("6 - wyświetl graf obiektow");
-                    Console.WriteLine("7 - zakoncz program");
+                    Console.WriteLine("7 - zakończ program");
                     try
                     {
                         wybor = int.Parse(Console.ReadLine());
@@ -41,6 +41,7 @@ namespace Zadanie2
                 {
                     case 1:
                         grafObiektow = new GrafObiektow();
+                        dataContext = new DataContext();
                         grafObiektow.Wypelnij(dataContext);
                         Console.WriteLine("Pomyślnie utworzono graf obiektów");
                         break;

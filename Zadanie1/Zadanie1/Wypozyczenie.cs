@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 namespace Zadanie1
 {
     [Serializable]
     public class Wypozyczenie : Zdarzenie
     {
-        [JsonConstructor]
         public Wypozyczenie(Wykaz osoba, OpisStanu ksiazka, DateTime wypozyczenie)
             : base(wypozyczenie)
         {
