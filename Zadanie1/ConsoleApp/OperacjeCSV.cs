@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -17,6 +18,13 @@ namespace Zadanie2
         public static void Zapisz(DataContext data)
         {
             foreach (Wykaz w in data.ElementyWykazu)
+            {
+                Stream s = new FileStream("Wykazy.csv", FileMode.Append, FileAccess.Write);
+                CSVFormatter formatter = new CSVFormatter();
+                formatter.Serialize(s,w);
+                s.Close();
+            }
+            /*foreach (Wykaz w in data.ElementyWykazu)
                 stringBuilder.AppendLine(string.Join(Delimiter,w.Id, w.Imie, w.Nazwisko));
             System.IO.File.WriteAllText("Wykazy.csv", stringBuilder.ToString());
 
@@ -29,7 +37,7 @@ namespace Zadanie2
             foreach (OpisStanu o in data.OpisyStanu)
                 stringBuilder.AppendLine(string.Join(Delimiter, o.Katalog.Id, o.Ilosc, o.Cena, o.DataZakupu));
             System.IO.File.WriteAllText("OpisyStanu.csv", stringBuilder.ToString());
-
+            */
             //stringBuilder = new StringBuilder();
             //foreach (Zdarzenie z in data.Zdarzenia)
             //    stringBuilder.AppendLine(string.Join(Delimiter, ));

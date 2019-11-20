@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.IO;
 
-namespace ConsoleApp
+namespace Zadanie2
 {
     class CSVFormatter : IFormatter
     {
@@ -16,7 +16,23 @@ namespace ConsoleApp
 
         public object Deserialize(Stream serializationStream)
         {
-            throw new NotImplementedException();
+            using (StreamReader sr = new StreamReader(serializationStream))
+            {
+                object deserializedObject = null;
+                string line = "";
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] separatedKeyValues = line.Split(',');
+                    SerializationInfo info = new SerializationInfo(deserializedObject.GetType(), new FormatterConverter());
+                    foreach (string s in separatedKeyValues)
+                    {
+                        string[] singleKeyValue = s.Split(':');
+                        info.AddValue(singleKeyValue[0], singleKeyValue[1]);
+                    }
+
+                }
+                return deserializedObject;
+            }
         }
 
         public void Serialize(Stream serializationStream, object graph)
@@ -35,6 +51,7 @@ namespace ConsoleApp
                     sw.Write(entry.Value);
                     sw.Write(",");
                 }
+                sw.WriteLine("");
             }
         }
     }
