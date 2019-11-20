@@ -14,6 +14,8 @@ namespace Zadanie1
         {
             this.Osoba = osoba;
             this.Ksiazka = ksiazka;
+            this.opisID = ksiazka.Katalog.Id;
+            this.klientID = osoba.Id;
         }
 
         public Zwrot(SerializationInfo info, StreamingContext context)

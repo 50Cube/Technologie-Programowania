@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Zadanie1;
 
 namespace Zadanie2
@@ -47,6 +48,10 @@ namespace Zadanie2
             {
                 String json = System.IO.File.ReadAllText("OpisyStanu.json");
                 dane.OpisyStanu = JsonConvert.DeserializeObject<List<OpisStanu>>(json, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+                foreach(OpisStanu os in dane.OpisyStanu)
+                {
+                    os.Katalog = dane.Katalogi[os.KatalogID];
+                }
             }
             else throw new Exception("Plik 'OpisyStanu.json' nie istnieje");
 
@@ -58,6 +63,54 @@ namespace Zadanie2
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                     TypeNameHandling = TypeNameHandling.Auto
                 });
+
+                foreach (Wypozyczenie z in dane.Zdarzenia.OfType<Wypozyczenie>())
+                {
+                    if (z.GetType() == typeof(Wypozyczenie))
+                    {
+                        foreach (OpisStanu os in dane.OpisyStanu)
+                        {
+                            if (os.Katalog.Id == z.opisID)
+                            {
+                                z.Ksiazka = os;
+                                break;
+                            }
+                        }
+                        foreach (Wykaz os in dane.ElementyWykazu)
+                        {
+                            if (os.Id == z.klientID)
+                            {
+                                z.Osoba = os;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+
+                foreach (Zwrot z in dane.Zdarzenia.OfType<Zwrot>())
+                {
+                    if (z.GetType() == typeof(Zwrot))
+                    {
+                        foreach (OpisStanu os in dane.OpisyStanu)
+                        {
+                            if (os.Katalog.Id == z.opisID)
+                            {
+                                z.Ksiazka = os;
+                                break;
+                            }
+                        }
+
+                        foreach (Wykaz os in dane.ElementyWykazu)
+                        {
+                            if (os.Id == z.klientID)
+                            {
+                                z.Osoba = os;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
             else throw new Exception("Plik 'Zdarzenia.json' nie istnieje");
 

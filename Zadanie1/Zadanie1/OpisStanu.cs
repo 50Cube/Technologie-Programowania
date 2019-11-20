@@ -11,6 +11,7 @@ namespace Zadanie1
             this.Ilosc = ilosc;
             this.Cena = cena;
             this.DataZakupu = data;
+            this.KatalogID = ksiazka.Id;
         }
         public OpisStanu(SerializationInfo info, StreamingContext context)
         {
