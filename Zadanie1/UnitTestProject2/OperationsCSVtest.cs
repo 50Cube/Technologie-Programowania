@@ -22,6 +22,7 @@ namespace Tests2
             Assert.AreEqual(dataContext.ElementyWykazu[1].Id, dataContext2.ElementyWykazu[1].Id);
             Assert.AreEqual(dataContext.ElementyWykazu[1].Imie, dataContext2.ElementyWykazu[1].Imie);
             Assert.AreEqual(dataContext.ElementyWykazu[1].Nazwisko, dataContext2.ElementyWykazu[1].Nazwisko);
+            Assert.AreEqual(dataContext.ElementyWykazu.Count, dataContext2.ElementyWykazu.Count);
         }
 
         [TestMethod]
@@ -40,6 +41,7 @@ namespace Tests2
             Assert.AreEqual(dataContext.Katalogi[1].Id, dataContext2.Katalogi[1].Id);
             Assert.AreEqual(dataContext.Katalogi[1].Tytul, dataContext2.Katalogi[1].Tytul);
             Assert.AreEqual(dataContext.Katalogi[1].RokWydania, dataContext2.Katalogi[1].RokWydania);
+            Assert.AreEqual(dataContext.Katalogi.Count, dataContext2.Katalogi.Count);
         }
 
         [TestMethod]
@@ -57,6 +59,7 @@ namespace Tests2
             Assert.AreEqual(dataContext.OpisyStanu[1].KatalogID, dataContext2.OpisyStanu[1].KatalogID);
             Assert.AreEqual(dataContext.OpisyStanu[1].Ilosc, dataContext2.OpisyStanu[1].Ilosc);
             Assert.AreEqual(dataContext.OpisyStanu[1].DataZakupu, dataContext2.OpisyStanu[1].DataZakupu);
+            Assert.AreEqual(dataContext.OpisyStanu.Count, dataContext2.OpisyStanu.Count);
         }
 
         [TestMethod]
