@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace Zadanie1
 {
-    [Serializable]
-    public class Zwrot : Zdarzenie, ISerializable
+    public class Zwrot : Zdarzenie
     {
         public Zwrot(Wykaz osoba, OpisStanu ksiazka, DateTime zwrot)
             : base(zwrot)
@@ -15,12 +13,6 @@ namespace Zadanie1
             this.klientID = osoba.Id;
         }
 
-        public Zwrot(SerializationInfo info, StreamingContext context)
-      : base(info, context)
-        {
-            this.opisID = (int)info.GetValue("OpisID", typeof(int));
-            this.klientID = (int)info.GetValue("KlientID", typeof(int));
-        }
         public int klientID;
         public int opisID;
         public Wykaz Osoba { get; set; }
@@ -29,13 +21,6 @@ namespace Zadanie1
         {
             string[] tekst = { "Zwrot ID Osoby: ", Osoba.Id.ToString(), ", ID Ksiazki: ", Ksiazka.Katalog.Id.ToString(), ", data zwrotu: ", Data.ToString() };
             return string.Concat(tekst);
-        }
-
-        override public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            info.AddValue("KlientID", this.Osoba.Id, typeof(int));
-            info.AddValue("OpisID", this.Ksiazka.Katalog.Id, typeof(int));
         }
 
     }

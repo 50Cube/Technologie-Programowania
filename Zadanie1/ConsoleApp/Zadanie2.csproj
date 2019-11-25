@@ -47,6 +47,10 @@
   <ItemGroup>
     <Compile Include="CSVFormatter.cs" />
     <Compile Include="GrafObiektow.cs" />
+    <Compile Include="KlasaA.cs" />
+    <Compile Include="KlasaB.cs" />
+    <Compile Include="KlasaC.cs" />
+    <Compile Include="Kolekcje.cs" />
     <Compile Include="OperacjeCSV.cs" />
     <Compile Include="OperacjeJSON.cs" />
     <Compile Include="Program.cs" />
