@@ -1,9 +1,10 @@
 ﻿using System;
-
+using Newtonsoft.Json;
 namespace Zadanie2
 {
     public class KlasaA
     {
+        public KlasaA() { }
         public KlasaA(float liczba, string napis, DateTime data, KlasaB obiekt)
         {
             this.Liczba = liczba;
