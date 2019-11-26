@@ -46,7 +46,7 @@ namespace Zadanie2
                         break;
                     case 3:
                         kolekcje = new Kolekcje();
-                        OperacjeJSON.Wczytaj(kolekcje);
+                        kolekcje = OperacjeJSON.Wczytaj();
                         Console.WriteLine("Pomyślnie wczytane dane z pliku .json");
                         break;
                     case 4:

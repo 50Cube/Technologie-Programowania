@@ -17,13 +17,14 @@ namespace Zadanie2
             System.IO.File.WriteAllText("Kolekcje.json", json);
         }
 
-        public static void Wczytaj(Kolekcje kolekcje)
+        public static Kolekcje Wczytaj()
         {
+            Kolekcje kolekcje;
             JsonSerializerSettings jsonsettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects, ReferenceLoopHandling = ReferenceLoopHandling.Serialize };
             if (System.IO.File.Exists("Kolekcje.json"))
             {
                 String json = System.IO.File.ReadAllText("Kolekcje.json");
-                kolekcje = JsonConvert.DeserializeObject<Kolekcje>(json, jsonsettings);
+                return kolekcje = JsonConvert.DeserializeObject<Kolekcje>(json, jsonsettings);
  
             }
             else throw new Exception("Plik 'Kolekcje.json' nie istnieje");
