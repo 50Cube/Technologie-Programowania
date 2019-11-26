@@ -9,19 +9,22 @@ namespace Zadanie2
 {
     public class OperacjeJSON
     {
+        
         public static void Zapisz(Kolekcje kolekcje)
         {
-            string json = JsonConvert.SerializeObject(kolekcje.ElementyKlasyA, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-            System.IO.File.WriteAllText("Kolekcje.json", json);
-            
+            JsonSerializerSettings jsonsettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All, ReferenceLoopHandling = ReferenceLoopHandling.Serialize };
+            string json = JsonConvert.SerializeObject(kolekcje.ElementyKlasyA, Formatting.Indented, jsonsettings); 
+            System.IO.File.WriteAllText("KolekcjeA.json", json);
         }
 
         public static void Wczytaj(Kolekcje kolekcje)
         {
-            if (System.IO.File.Exists("Kolekcje.json"))
+            JsonSerializerSettings jsonsettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All, ReferenceLoopHandling = ReferenceLoopHandling.Serialize };
+            if (System.IO.File.Exists("KolekcjeA.json"))
             {
-                String json = System.IO.File.ReadAllText("Kolekcje.json");
-                kolekcje.ElementyKlasyA = JsonConvert.DeserializeObject<List<KlasaA>>(json, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+                String json = System.IO.File.ReadAllText("KolekcjeA.json");
+                kolekcje.ElementyKlasyA = JsonConvert.DeserializeObject<List<KlasaA>>(json, jsonsettings);
+ 
             }
             else throw new Exception("Plik 'Kolekcje.json' nie istnieje");
         }

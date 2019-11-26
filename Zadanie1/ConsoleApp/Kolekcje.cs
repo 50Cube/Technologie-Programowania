@@ -8,13 +8,13 @@ namespace Zadanie2
         public Kolekcje()
         {
             ElementyKlasyA = new List<KlasaA>();
-            ElementyKlasyB = new ObservableCollection<KlasaB>();
+            ElementyKlasyB = new List<KlasaB>();
             ElementyKlasyC = new List<KlasaC>();
             
         }
 
         public List<KlasaA> ElementyKlasyA { get; set; }
-        public ObservableCollection<KlasaB> ElementyKlasyB { get; set; }
+        public List<KlasaB> ElementyKlasyB { get; set; }
         public List<KlasaC> ElementyKlasyC { get; set; }
     }
 }
