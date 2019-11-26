@@ -27,15 +27,23 @@ namespace Zadanie2
             obiektA3 = new KlasaA(10.3f, "NapisA3", new DateTime(2019, 11, 27), obiektB3);
             obiektA4 = new KlasaA(10.5f, "NapisA4", new DateTime(2019, 11, 28), obiektB3);
 
+            obiektC1 = new KlasaC(0.1f, "NapisC1", new DateTime(2019, 10, 10), obiektA1);
+            obiektC2 = new KlasaC(0.2f, "NapisC2", new DateTime(2019, 10, 11), obiektA2);
+            obiektC3 = new KlasaC(0.3f, "NapisC3", new DateTime(2019, 10, 12), obiektA3);
+            obiektC4 = new KlasaC(0.4f, "NapisC4", new DateTime(2019, 10, 13), obiektA3);
+
             obiektB1 = new KlasaB(22.2f, "NapisB1", new DateTime(2019, 12, 06), obiektC1);
             obiektB2 = new KlasaB(33.3f, "NapisB2", new DateTime(2019, 12, 07), obiektC2);
             obiektB3 = new KlasaB(44.4f, "NapisB3", new DateTime(2019, 12, 08), obiektC3);
             obiektB4 = new KlasaB(55.5f, "NapisB3", new DateTime(2019, 12, 08), obiektC3);
 
-            obiektC1 = new KlasaC(0.1f, "NapisC1", new DateTime(2019, 10, 10), obiektA1);
-            obiektC2 = new KlasaC(0.2f, "NapisC2", new DateTime(2019, 10, 11), obiektA2);
-            obiektC3 = new KlasaC(0.3f, "NapisC3", new DateTime(2019, 10, 12), obiektA3);
-            obiektC4 = new KlasaC(0.4f, "NapisC4", new DateTime(2019, 10, 13), obiektA3);
+            obiektA1.Obiekt = obiektB1;
+            obiektA2.Obiekt = obiektB2;
+            obiektA3.Obiekt = obiektB3;
+            obiektA4.Obiekt = obiektB4;
+
+
+
 
             kolekcje.ElementyKlasyA.Add(obiektA1);
             kolekcje.ElementyKlasyA.Add(obiektA2);
