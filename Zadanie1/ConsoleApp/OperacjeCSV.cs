@@ -9,7 +9,12 @@ namespace Zadanie2
         {
             if (File.Exists("Kolekcje.csv"))
                 File.Delete("Kolekcje.csv");
-
+            
+                Stream s = new FileStream("Kolekcje.csv", FileMode.Append, FileAccess.Write);
+                CSVFormatter<Kolekcje> formatter = new CSVFormatter<Kolekcje>();
+                formatter.Serialize(s, kolekcje);
+                s.Close();
+            
         }
 
         public static void Wczytaj(Kolekcje kolekcje)
