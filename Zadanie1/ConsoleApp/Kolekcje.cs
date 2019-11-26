@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 namespace Zadanie2
@@ -15,6 +14,7 @@ namespace Zadanie2
             ElementyKlasyC = new List<KlasaC>();
             
         }
+
         [JsonProperty]
         public List<KlasaA> ElementyKlasyA { get; set; }
         [JsonProperty]

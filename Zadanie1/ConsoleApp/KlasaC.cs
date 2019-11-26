@@ -5,12 +5,21 @@ namespace Zadanie2
     public class KlasaC : ISerializable
     {
         public KlasaC() { }
+
         public KlasaC(float liczba, string napis, DateTime data, KlasaA obiekt)
         {
             this.Liczba = liczba;
             this.Napis = napis;
             this.Data = data;
             this.Obiekt = obiekt;
+        }
+
+        public KlasaC(SerializationInfo info, StreamingContext context)
+        {
+            Liczba = (float)info.GetValue("Liczba", typeof(float));
+            Napis = (string)info.GetValue("Napis", typeof(string));
+            Data = (DateTime)info.GetValue("Data", typeof(DateTime));
+            Obiekt = (KlasaA)info.GetValue("Obiekt", typeof(KlasaA));
         }
 
         public float Liczba { get; set; }
