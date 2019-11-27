@@ -5,50 +5,110 @@ using System.IO;
 
 namespace Zadanie2
 {
-    class CSVFormatter<T> : IFormatter where T: class
+    class CSVFormatter : Formatter
     {
-        public ISurrogateSelector SurrogateSelector { get; set; }
-        public SerializationBinder Binder { get; set; }
-        public StreamingContext Context { get; set; }
+        public override ISurrogateSelector SurrogateSelector { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override SerializationBinder Binder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override StreamingContext Context { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public object Deserialize(Stream serializationStream)
+        public override object Deserialize(Stream serializationStream)
         {
-            StreamReader sr = new StreamReader(serializationStream);
-            string line = "";
-            line = sr.ReadLine();
-            line = line.Remove(line.Length - 1);
-            T createdObject = (T)FormatterServices.GetUninitializedObject(typeof(T));
-            string[] separatedKeyValues = line.Split(',');
-            SerializationInfo info = new SerializationInfo(createdObject.GetType(), new FormatterConverter());
-            foreach (string s in separatedKeyValues)
-            {
-                string[] singleKeyValue = s.Split(';');
-                info.AddValue(singleKeyValue[0], singleKeyValue[1]);
-            }
-            createdObject = (T)Activator.CreateInstance(typeof(T),info,Context);
-            sr.Dispose();
-            return createdObject;
+            throw new NotImplementedException();
         }
 
-        public void Serialize(Stream serializationStream, object graph)
+        public override void Serialize(Stream serializationStream, object graph)
         {
-            SerializationInfo si = new SerializationInfo(graph.GetType(), new FormatterConverter());
-            StreamingContext cx = new StreamingContext(StreamingContextStates.File);
-            ISerializable serializableGraph = (ISerializable)graph;
-            serializableGraph.GetObjectData(si, cx);
+            throw new NotImplementedException();
+        }
 
-            using (StreamWriter sw = new StreamWriter(serializationStream))
-            {
-                foreach (SerializationEntry entry in si)
-                {
-                    sw.Write(entry.Name);
-                    sw.Write(";");
-                    sw.Write(entry.Value);
-                    sw.Write(",");
-                }
-                sw.WriteLine("");
-                sw.Flush();
-            }
+        protected override void WriteArray(object obj, string name, Type memberType)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteBoolean(bool val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteByte(byte val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteChar(char val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDateTime(DateTime val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDecimal(decimal val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDouble(double val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt16(short val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt32(int val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt64(long val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteObjectRef(object obj, string name, Type memberType)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteSByte(sbyte val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteSingle(float val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteTimeSpan(TimeSpan val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt16(ushort val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt32(uint val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt64(ulong val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteValueType(object obj, string name, Type memberType)
+        {
+            throw new NotImplementedException();
         }
     }
 }
