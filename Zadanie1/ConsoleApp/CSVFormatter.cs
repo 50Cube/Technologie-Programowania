@@ -3,6 +3,8 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Globalization;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace Zadanie2
 {
@@ -15,24 +17,90 @@ namespace Zadanie2
         public override StreamingContext Context { get; set; }
 
         public override object Deserialize(Stream serializationStream)
-        {          
+        {
+            Dictionary<string, object> objectRefs = new Dictionary<string, object>();
+            object createdObject = null;
+            List<object> objects = new List<object>();
             StreamReader sr = new StreamReader(serializationStream);
-            string line="";
-            while ((line = sr.ReadLine())!=null)
+            string entry = "";
+            List<string> lines = new List<string>();
+            while ((entry = sr.ReadLine())!=null)
+            {
+                lines.Add(entry);
+                /*
+                string[] typeDataSplit = line.Split('#');
+                Type objType = Type.GetType(typeDataSplit[0]);
+                object tempObject = FormatterServices.GetUninitializedObject(objType); // tworzenie obiektu znajac jego nazwe
+                MemberInfo[] members = FormatterServices.GetSerializableMembers(objType, Context);
+                string[] keyValuePairs = typeDataSplit[1].Split(',');
+                string[] refSplit = keyValuePairs[0].Split(':');
+                objectRefs[refSplit[1]] = tempObject;
+
+                SerializationInfo info = new SerializationInfo(objType, new FormatterConverter());
+                object[] data = new object[members.Length];
+                for (int i = 1;i < members.Length; ++i)
+                {
+                    string[] keyValueSeparated = keyValuePairs[i].Split(':');
+                    FieldInfo fi = ((FieldInfo)members[i]);
+                    try
+                    {
+                        string temp = keyValueSeparated[1];
+                        data[i] = Convert.ChangeType(temp, fi.FieldType);
+                        info.AddValue(keyValueSeparated[0], keyValueSeparated[1]);
+                    }
+                    catch(InvalidCastException)
+                    {
+                        info.AddValue(keyValueSeparated[0], null);
+                        //                      data[i] = null;
+                    }
+                }
+                 createdObject = Activator.CreateInstance(objType, info, Context);    
+                 */
+            }
+            foreach(string line in lines)
             {
                 string[] typeDataSplit = line.Split('#');
                 Type objType = Type.GetType(typeDataSplit[0]);
-                FormatterServices.GetUninitializedObject(objType); // tworzenie obiektu znajac jego nazwe
+                object tempObject = FormatterServices.GetUninitializedObject(objType);
                 string[] keyValuePairs = typeDataSplit[1].Split(',');
-                foreach(string pair in keyValuePairs)
-                {
-                    string[] keyValueSplit = pair.Split(':');
-                }
-                               
+                string[] refSplit = keyValuePairs[0].Split(':');
+                objectRefs[refSplit[1]] = tempObject;
             }
-            sr.Dispose();
-            
-            return new object();
+
+            foreach(string line in lines)
+            {
+                string[] typeDataSplit = line.Split('#');
+                Type objType = Type.GetType(typeDataSplit[0]);
+                object tempObject = FormatterServices.GetUninitializedObject(objType);
+                string[] keyValuePairs = typeDataSplit[1].Split(',');
+                string[] refSplit = keyValuePairs[0].Split(':');
+                SerializationInfo info = new SerializationInfo(tempObject.GetType(), new FormatterConverter());
+                foreach (string s in keyValuePairs)
+                {
+                    if(!s.Contains("ref"))
+                    {
+                        string[] singleKeyValue = s.Split(';');
+                        if (singleKeyValue[0] == "Data")
+                        {
+                            DateTime data = DateTime.Parse(singleKeyValue[1], CultureInfo.InvariantCulture);
+                            info.AddValue(singleKeyValue[0], data);
+                        }
+                        else if (singleKeyValue[0] != "Obiekt")
+                        {
+                            info.AddValue(singleKeyValue[0], singleKeyValue[1]);
+                        }
+                        else
+                        {
+                            info.AddValue(singleKeyValue[0], objectRefs[singleKeyValue[1]]);
+                        }
+                    }
+                    
+                }
+ //               createdObject = Activator.CreateInstance(objType, info, Context);
+                objects.Add(createdObject);
+            }
+                sr.Dispose();        
+            return createdObject;
         }
 
         public override void Serialize(Stream serializationStream, object graph)
@@ -86,7 +154,7 @@ namespace Zadanie2
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            ObjectTextForm.Append(name +":"+val.ToUniversalTime()+",");
+            ObjectTextForm.Append(name +";"+val.ToString(DateTimeFormatInfo.InvariantInfo)+",");
         }
 
         protected override void WriteDecimal(decimal val, string name)
@@ -119,11 +187,11 @@ namespace Zadanie2
             if(memberType != typeof(string))
             {
                 this.Schedule(obj);
-                ObjectTextForm.Append(name + ":" + this.m_idGenerator.GetId(obj, out bool firstTime) + ",");
+                ObjectTextForm.Append(name + ";" + this.m_idGenerator.GetId(obj, out bool firstTime)+ ",");
             }
             else
             {
-                ObjectTextForm.Append(name + ":" + obj.ToString() + ",");
+                ObjectTextForm.Append(name + ";" + obj.ToString() + ",");
             }
         }
 
@@ -134,7 +202,7 @@ namespace Zadanie2
 
         protected override void WriteSingle(float val, string name)
         {
-            ObjectTextForm.Append(name + ":" + val.ToString("0.00", CultureInfo.InvariantCulture) + ",");
+            ObjectTextForm.Append(name + ";" + val.ToString("0.00", CultureInfo.InvariantCulture) + ",");
         }
 
         protected override void WriteTimeSpan(TimeSpan val, string name)

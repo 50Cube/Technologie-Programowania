@@ -12,7 +12,7 @@ namespace Zadanie2
             
                 Stream s = new FileStream("Kolekcje.csv", FileMode.Append, FileAccess.Write);
                 CSVFormatter formatter = new CSVFormatter();
-                formatter.Serialize(s, kolekcje);
+                formatter.Serialize(s, kolekcje.ObiektA);
                 s.Close();
             
         }

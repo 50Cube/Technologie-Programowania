@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 namespace Zadanie2
 {
+    [Serializable]
     [JsonObject]
     public class Kolekcje : ISerializable
     {

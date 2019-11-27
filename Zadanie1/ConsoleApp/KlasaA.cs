@@ -3,6 +3,7 @@ using System;
 using System.Runtime.Serialization;
 namespace Zadanie2
 {
+ //   [Serializable]
     public class KlasaA : ISerializable
     {
         [JsonConstructor]
@@ -23,10 +24,13 @@ namespace Zadanie2
             Data = (DateTime) info.GetValue("Data", typeof(DateTime));
             Obiekt = (KlasaB)info.GetValue("Obiekt", typeof(KlasaB));
         }
-
+        [JsonProperty]
         public float Liczba { get; set; }
+        [JsonProperty]
         public string Napis { get; set; }
+        [JsonProperty]
         public DateTime Data { get; set; }
+        [JsonProperty]
         public KlasaB Obiekt { get; set; }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)

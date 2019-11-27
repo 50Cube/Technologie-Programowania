@@ -3,6 +3,7 @@ using System;
 using System.Runtime.Serialization;
 namespace Zadanie2
 {
+    [Serializable]
     public class KlasaC : ISerializable
     {
         [JsonConstructor]
