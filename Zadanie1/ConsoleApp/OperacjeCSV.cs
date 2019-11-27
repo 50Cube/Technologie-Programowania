@@ -11,7 +11,7 @@ namespace Zadanie2
                 File.Delete("Kolekcje.csv");
             
                 Stream s = new FileStream("Kolekcje.csv", FileMode.Append, FileAccess.Write);
-                CSVFormatter<Kolekcje> formatter = new CSVFormatter<Kolekcje>();
+                CSVFormatter formatter = new CSVFormatter();
                 formatter.Serialize(s, kolekcje);
                 s.Close();
             
@@ -19,7 +19,7 @@ namespace Zadanie2
 
         public static void Wczytaj(Kolekcje kolekcje)
         {
-            CSVFormatter<Kolekcje> formatterCSV = new CSVFormatter<Kolekcje>();
+            CSVFormatter formatterCSV = new CSVFormatter();
             string line;
             StreamReader file = new System.IO.StreamReader("Kolekcje.csv");
 

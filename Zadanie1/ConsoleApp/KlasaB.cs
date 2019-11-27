@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Runtime.Serialization;
 namespace Zadanie2
 {
+    [Serializable]
     public class KlasaB : ISerializable
     {
+        [JsonConstructor]
         public KlasaB() { }
 
         public KlasaB(float liczba, string napis, DateTime data, KlasaC obiekt)
