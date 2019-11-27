@@ -9,24 +9,20 @@ namespace Zadanie2
         [JsonConstructor]
         public Kolekcje()
         {
-            ElementyKlasyA = new List<KlasaA>();
-            ElementyKlasyB = new List<KlasaB>();
-            ElementyKlasyC = new List<KlasaC>();
-            
+            Obiekty = new List<object>();
+        }
+
+        public Kolekcje(SerializationInfo info, StreamingContext context)
+        {
+            Obiekty = (List<object>)info.GetValue("Obiekty", typeof(List<object>));
         }
 
         [JsonProperty]
-        public List<KlasaA> ElementyKlasyA { get; set; }
-        [JsonProperty]
-        public List<KlasaB> ElementyKlasyB { get; set; }
-        [JsonProperty]
-        public List<KlasaC> ElementyKlasyC { get; set; }
+        public List<object> Obiekty { get; set; }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("ElementyKlasyA", this.ElementyKlasyA);
-            info.AddValue("ElementyKlasyB", this.ElementyKlasyB);
-            info.AddValue("ElementyKlasyC", this.ElementyKlasyC);
+            info.AddValue("Obiekty", this.Obiekty);
         }
     }
 }
