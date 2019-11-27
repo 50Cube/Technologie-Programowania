@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 namespace Zadanie2
@@ -9,20 +10,35 @@ namespace Zadanie2
         [JsonConstructor]
         public Kolekcje()
         {
-            Obiekty = new List<object>();
+            ObiektA = new KlasaA();
+            ObiektB = new KlasaB();
+            ObiektC = new KlasaC();
         }
 
         public Kolekcje(SerializationInfo info, StreamingContext context)
         {
-            Obiekty = (List<object>)info.GetValue("Obiekty", typeof(List<object>));
+            ObiektA = (KlasaA)info.GetValue("ObiektA", typeof(KlasaA));
+            ObiektB = (KlasaB)info.GetValue("ObiektB", typeof(KlasaB));
+            ObiektC = (KlasaC)info.GetValue("ObiektC", typeof(KlasaC));
         }
 
         [JsonProperty]
-        public List<object> Obiekty { get; set; }
+        public KlasaA ObiektA { get; set; }
+        [JsonProperty]
+        public KlasaB ObiektB { get; set; }
+        [JsonProperty]
+        public KlasaC ObiektC { get; set; }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Obiekty", this.Obiekty);
+            info.AddValue("ObiektA", this.ObiektA);
+            info.AddValue("ObiektB", this.ObiektB);
+            info.AddValue("ObiektC", this.ObiektC);
+        }
+
+        public override string ToString()
+        {
+            return "Obiekt A: " + this.ObiektA.ToString() + "\nObiekt B: " + this.ObiektB.ToString() + "\nObiekt C: " + this.ObiektC.ToString();
         }
     }
 }
