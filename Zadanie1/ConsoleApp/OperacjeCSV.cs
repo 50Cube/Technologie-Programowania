@@ -20,7 +20,8 @@ namespace Zadanie2
         public static void Wczytaj(Kolekcje kolekcje)
         {
             CSVFormatter formatterCSV = new CSVFormatter();
-            string line;
+            Stream s = new FileStream("Kolekcje.csv", FileMode.Open, FileAccess.Read);
+            formatterCSV.Deserialize(s);
             StreamReader file = new System.IO.StreamReader("Kolekcje.csv");
 
             file.Close();

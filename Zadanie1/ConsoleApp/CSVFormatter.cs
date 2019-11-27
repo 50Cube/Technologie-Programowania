@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Globalization;
+
 namespace Zadanie2
 {
     class CSVFormatter : Formatter
@@ -14,8 +15,22 @@ namespace Zadanie2
         public override StreamingContext Context { get; set; }
 
         public override object Deserialize(Stream serializationStream)
-        {
-            throw new NotImplementedException();
+        {          
+            StreamReader sr = new StreamReader(serializationStream);
+            string line="";
+            while ((line = sr.ReadLine())!=null)
+            {
+                string[] typeDataSplit = line.Split('#');
+                string[] keyValuePairs = typeDataSplit[1].Split(',');
+                foreach(string pair in keyValuePairs)
+                {
+                    string[] keyValueSplit = pair.Split(':');
+                }
+                               
+            }
+            sr.Dispose();
+            
+            return new object();
         }
 
         public override void Serialize(Stream serializationStream, object graph)
@@ -25,7 +40,7 @@ namespace Zadanie2
         SerializationInfo _info = new SerializationInfo(graph.GetType(), new FormatterConverter());
         StreamingContext _context = new StreamingContext(StreamingContextStates.File);
         _data.GetObjectData(_info, _context);
-        ObjectTextForm.Append("ref" + ":" + this.m_idGenerator.GetId(graph, out bool firstTime)+",");
+        ObjectTextForm.Append(graph.GetType() +"#"+"ref" + ":" + this.m_idGenerator.GetId(graph, out bool firstTime)+",");
         foreach (SerializationEntry _item in _info)
         {
             WriteMember(_item.Name, _item.Value);
