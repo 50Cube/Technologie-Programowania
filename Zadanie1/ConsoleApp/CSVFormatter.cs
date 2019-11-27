@@ -21,6 +21,8 @@ namespace Zadanie2
             while ((line = sr.ReadLine())!=null)
             {
                 string[] typeDataSplit = line.Split('#');
+                Type objType = Type.GetType(typeDataSplit[0]);
+                FormatterServices.GetUninitializedObject(objType); // tworzenie obiektu znajac jego nazwe
                 string[] keyValuePairs = typeDataSplit[1].Split(',');
                 foreach(string pair in keyValuePairs)
                 {
