@@ -16,6 +16,7 @@ namespace Tests2
 
             grafObiektow.Wypelnij(kolekcje);
             OperacjeCSV.Zapisz(kolekcje);
+            kolekcje2 = OperacjeCSV.Wczytaj();
 
             Assert.AreEqual(kolekcje.ObiektA.Liczba, kolekcje2.ObiektA.Liczba);
             Assert.AreEqual(kolekcje.ObiektA.Napis, kolekcje2.ObiektA.Napis);
@@ -32,6 +33,7 @@ namespace Tests2
 
             grafObiektow.Wypelnij(kolekcje);
             OperacjeCSV.Zapisz(kolekcje);
+            kolekcje2 = OperacjeCSV.Wczytaj();
 
             Assert.AreEqual(kolekcje.ObiektB.Liczba, kolekcje2.ObiektB.Liczba);
             Assert.AreEqual(kolekcje.ObiektB.Napis, kolekcje2.ObiektB.Napis);
@@ -48,6 +50,7 @@ namespace Tests2
 
             grafObiektow.Wypelnij(kolekcje);
             OperacjeCSV.Zapisz(kolekcje);
+            kolekcje2 = OperacjeCSV.Wczytaj();
 
             Assert.AreEqual(kolekcje.ObiektC.Liczba, kolekcje2.ObiektC.Liczba);
             Assert.AreEqual(kolekcje.ObiektC.Napis, kolekcje2.ObiektC.Napis);
