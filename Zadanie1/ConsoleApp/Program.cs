@@ -55,7 +55,7 @@ namespace Zadanie2
                         break;
                     case 5:
                         kolekcje = new Kolekcje();
-                        OperacjeCSV.Wczytaj(kolekcje);
+                        kolekcje = OperacjeCSV.Wczytaj();
                         Console.WriteLine("Pomyślnie wczytane dane z pliku .csv");
                         break;
                     case 6:

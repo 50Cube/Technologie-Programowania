@@ -10,8 +10,7 @@ namespace Zadanie2
 {
     class CSVFormatter : Formatter
     {
-        StringBuilder ObjectTextForm = new StringBuilder();
-        private bool firstEntry = true;
+        StringBuilder stringBuilder = new StringBuilder();
         public override ISurrogateSelector SurrogateSelector { get; set; }
         public override SerializationBinder Binder { get; set; }
         public override StreamingContext Context { get; set; }
@@ -19,43 +18,17 @@ namespace Zadanie2
         public override object Deserialize(Stream serializationStream)
         {
             Dictionary<string, object> objectRefs = new Dictionary<string, object>();
-            object createdObject = null;
-            List<object> objects = new List<object>();
+            Dictionary<string, Type> RefsTypes = new Dictionary<string, Type>();
+            Dictionary<string, SerializationInfo> refsInfos = new Dictionary<string, SerializationInfo>();
+            Dictionary<objectInfoName, string> objectInfoNameRefs = new Dictionary<objectInfoName, string>();
+            List<Tuple<string, string, string>> referenceBuffer = new List<Tuple<string, string, string>>();
+
             StreamReader sr = new StreamReader(serializationStream);
             string entry = "";
             List<string> lines = new List<string>();
             while ((entry = sr.ReadLine())!=null)
             {
                 lines.Add(entry);
-                /*
-                string[] typeDataSplit = line.Split('#');
-                Type objType = Type.GetType(typeDataSplit[0]);
-                object tempObject = FormatterServices.GetUninitializedObject(objType); // tworzenie obiektu znajac jego nazwe
-                MemberInfo[] members = FormatterServices.GetSerializableMembers(objType, Context);
-                string[] keyValuePairs = typeDataSplit[1].Split(',');
-                string[] refSplit = keyValuePairs[0].Split(':');
-                objectRefs[refSplit[1]] = tempObject;
-
-                SerializationInfo info = new SerializationInfo(objType, new FormatterConverter());
-                object[] data = new object[members.Length];
-                for (int i = 1;i < members.Length; ++i)
-                {
-                    string[] keyValueSeparated = keyValuePairs[i].Split(':');
-                    FieldInfo fi = ((FieldInfo)members[i]);
-                    try
-                    {
-                        string temp = keyValueSeparated[1];
-                        data[i] = Convert.ChangeType(temp, fi.FieldType);
-                        info.AddValue(keyValueSeparated[0], keyValueSeparated[1]);
-                    }
-                    catch(InvalidCastException)
-                    {
-                        info.AddValue(keyValueSeparated[0], null);
-                        //                      data[i] = null;
-                    }
-                }
-                 createdObject = Activator.CreateInstance(objType, info, Context);    
-                 */
             }
             foreach(string line in lines)
             {
@@ -65,42 +38,78 @@ namespace Zadanie2
                 string[] keyValuePairs = typeDataSplit[1].Split(',');
                 string[] refSplit = keyValuePairs[0].Split(':');
                 objectRefs[refSplit[1]] = tempObject;
+                RefsTypes[refSplit[1]] = objType;
             }
 
             foreach(string line in lines)
             {
                 string[] typeDataSplit = line.Split('#');
-                Type objType = Type.GetType(typeDataSplit[0]);
-                object tempObject = FormatterServices.GetUninitializedObject(objType);
                 string[] keyValuePairs = typeDataSplit[1].Split(',');
                 string[] refSplit = keyValuePairs[0].Split(':');
-                SerializationInfo info = new SerializationInfo(tempObject.GetType(), new FormatterConverter());
-                foreach (string s in keyValuePairs)
+                PropertyInfo[] properties = RefsTypes[refSplit[1]].GetProperties();
+                Type[] types = GetTypesFromProperties(properties);
+                SerializationInfo info = new SerializationInfo(RefsTypes[refSplit[1]], new FormatterConverter());
+                refsInfos.Add(refSplit[1], info);
+                for (int i = 1; i < keyValuePairs.Length; i++)
                 {
-                    if(!s.Contains("ref"))
+                    string s = keyValuePairs[i];                   
+                    string[] singleKeyValue = s.Split(';');
+                    if(singleKeyValue[0].StartsWith("|ObjectReference|"))
                     {
-                        string[] singleKeyValue = s.Split(';');
-                        if (singleKeyValue[0] == "Data")
-                        {
-                            DateTime data = DateTime.Parse(singleKeyValue[1], CultureInfo.InvariantCulture);
-                            info.AddValue(singleKeyValue[0], data);
-                        }
-                        else if (singleKeyValue[0] != "Obiekt")
-                        {
-                            info.AddValue(singleKeyValue[0], singleKeyValue[1]);
-                        }
-                        else
-                        {
-                            info.AddValue(singleKeyValue[0], objectRefs[singleKeyValue[1]]);
-                        }
+                       string infoName = singleKeyValue[0].Remove(0, 17);
+                        objectInfoName keyObjectInfo;
+                        keyObjectInfo.obj = refSplit[1];
+                        keyObjectInfo.infoName = infoName;
+                        objectInfoNameRefs[keyObjectInfo] = singleKeyValue[1];
                     }
-                    
+                    else
+                    {
+                        Type keyType = types[i-1];
+                        object value = null;
+                        if(keyType == typeof(string))
+                        {
+                            value = singleKeyValue[1];
+                        }
+                        else if(keyType == typeof(Single))
+                        {
+                            value = Single.Parse(singleKeyValue[1], CultureInfo.InvariantCulture);
+                        }
+                        else if(keyType == typeof(DateTime))
+                        {
+                            value = DateTime.Parse(singleKeyValue[1], CultureInfo.InvariantCulture);
+                        }
+                        info.AddValue(singleKeyValue[0], value);
+                    }
                 }
- //               createdObject = Activator.CreateInstance(objType, info, Context);
-                objects.Add(createdObject);
+
             }
-                sr.Dispose();        
-            return createdObject;
+
+            foreach (KeyValuePair<objectInfoName,string> pair in objectInfoNameRefs)
+            {
+                string obj = pair.Key.obj;
+                string value = pair.Value;
+                string infoName = pair.Key.infoName;
+                refsInfos[obj].AddValue(infoName, objectRefs[value]);
+            }
+
+            foreach (KeyValuePair<string, SerializationInfo> keyValue in refsInfos)
+            {
+                Type[] constructorTypes = { typeof(SerializationInfo), typeof(StreamingContext) };
+                object[] constuctorParameters = { keyValue.Value, Context };
+                objectRefs[keyValue.Key].GetType().GetConstructor(constructorTypes).Invoke(objectRefs[keyValue.Key], constuctorParameters);
+            }
+            sr.Dispose();        
+            return objectRefs["1"];
+        }
+
+        private Type[] GetTypesFromProperties(PropertyInfo[] properties)
+        {
+            Type[] types = new Type[properties.Length];
+            for(int i=0;i<types.Length;i++)
+            {
+                types[i] = properties[i].PropertyType;
+            }
+            return types;
         }
 
         public override void Serialize(Stream serializationStream, object graph)
@@ -110,28 +119,32 @@ namespace Zadanie2
         SerializationInfo _info = new SerializationInfo(graph.GetType(), new FormatterConverter());
         StreamingContext _context = new StreamingContext(StreamingContextStates.File);
         _data.GetObjectData(_info, _context);
-        ObjectTextForm.Append(graph.GetType() +"#"+"ref" + ":" + this.m_idGenerator.GetId(graph, out bool firstTime)+",");
+        stringBuilder.Append(graph.GetType().AssemblyQualifiedName + "#"+"ref" + ":" + this.m_idGenerator.GetId(graph, out bool firstTime)+",");
         foreach (SerializationEntry _item in _info)
         {
             WriteMember(_item.Name, _item.Value);
         }
         while (this.m_objectQueue.Count != 0)
         {
-            ObjectTextForm.Length--; //remove trailing coma
-            ObjectTextForm.Append("\n");
+            stringBuilder.Length--; //remove trailing coma
+            stringBuilder.Append("\n");
             this.Serialize(null, this.m_objectQueue.Dequeue());
         }
         if(serializationStream != null)
         {
             using (StreamWriter writer = new StreamWriter(serializationStream))
             {
-                ObjectTextForm.Length--; //remove last trailing coma
-                writer.Write(ObjectTextForm);
+                stringBuilder.Length--; //remove last trailing coma
+                writer.Write(stringBuilder);
             }
         }
     }
 
-
+    private struct objectInfoName
+        {
+            public string obj;
+            public string infoName;
+        }
     protected override void WriteArray(object obj, string name, Type memberType)
         {
             throw new NotImplementedException();
@@ -154,7 +167,7 @@ namespace Zadanie2
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            ObjectTextForm.Append(name +";"+val.ToString(DateTimeFormatInfo.InvariantInfo)+",");
+            stringBuilder.Append(name +";"+val.ToString(DateTimeFormatInfo.InvariantInfo)+",");
         }
 
         protected override void WriteDecimal(decimal val, string name)
@@ -187,11 +200,11 @@ namespace Zadanie2
             if(memberType != typeof(string))
             {
                 this.Schedule(obj);
-                ObjectTextForm.Append(name + ";" + this.m_idGenerator.GetId(obj, out bool firstTime)+ ",");
+                stringBuilder.Append("|ObjectReference|"+name + ";" + this.m_idGenerator.GetId(obj, out bool firstTime)+ ",");
             }
             else
             {
-                ObjectTextForm.Append(name + ";" + obj.ToString() + ",");
+                stringBuilder.Append(name + ";" + obj.ToString() + ",");
             }
         }
 
@@ -202,7 +215,7 @@ namespace Zadanie2
 
         protected override void WriteSingle(float val, string name)
         {
-            ObjectTextForm.Append(name + ";" + val.ToString("0.00", CultureInfo.InvariantCulture) + ",");
+            stringBuilder.Append(name + ";" + val.ToString("0.00", CultureInfo.InvariantCulture) + ",");
         }
 
         protected override void WriteTimeSpan(TimeSpan val, string name)

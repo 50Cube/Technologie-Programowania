@@ -12,19 +12,18 @@ namespace Zadanie2
             
                 Stream s = new FileStream("Kolekcje.csv", FileMode.Append, FileAccess.Write);
                 CSVFormatter formatter = new CSVFormatter();
-                formatter.Serialize(s, kolekcje.ObiektA);
+                formatter.Serialize(s, kolekcje);
                 s.Close();
             
         }
 
-        public static void Wczytaj(Kolekcje kolekcje)
+        public static Kolekcje Wczytaj()
         {
             CSVFormatter formatterCSV = new CSVFormatter();
             Stream s = new FileStream("Kolekcje.csv", FileMode.Open, FileAccess.Read);
-            formatterCSV.Deserialize(s);
-            StreamReader file = new System.IO.StreamReader("Kolekcje.csv");
-
-            file.Close();
+            Kolekcje k = (Kolekcje)formatterCSV.Deserialize(s);
+            s.Close();
+            return k;
 
         }
     }
