@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 namespace Zadanie2
 {
     [Serializable]
+    [JsonObject]
     public class KlasaC : ISerializable
     {
         [JsonConstructor]

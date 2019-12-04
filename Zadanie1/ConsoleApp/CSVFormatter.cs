@@ -47,8 +47,8 @@ namespace Zadanie2
                 string[] refSplit = keyValuePairs[0].Split(':');
 
                 string objectID = refSplit[1];
-                PropertyInfo[] properties = RefsTypes[objectID].GetProperties();
-                Type[] types = GetTypesFromProperties(properties);                  //Tablica zawierajaca typy pol obiektu
+                MemberInfo[] members = FormatterServices.GetSerializableMembers(RefsTypes[objectID]); 
+                Type[] types = GetTypesFromMembers(members);                  //Tablica zawierajaca typy pol obiektu
                 SerializationInfo info = new SerializationInfo(RefsTypes[objectID], new FormatterConverter());
                 refsInfos.Add(objectID, info);
                 for (int i = 1; i < keyValuePairs.Length; i++)  //Dodanie wartosci do SerializationInfo
@@ -90,20 +90,23 @@ namespace Zadanie2
 
             foreach (KeyValuePair<string, SerializationInfo> keyValue in refsInfos)
             {
-                Type[] constructorTypes = { typeof(SerializationInfo), typeof(StreamingContext) };
-                object[] constuctorParameters = { keyValue.Value, Context };
-                objectRefs[keyValue.Key].GetType().GetConstructor(constructorTypes).Invoke(objectRefs[keyValue.Key], constuctorParameters);     //Wywołanie konstruktora dla każdego z deserializowanych obiektów
+                Type[] types = { typeof(SerializationInfo), typeof(StreamingContext) };
+                object[] parameters = { keyValue.Value, Context };
+                objectRefs[keyValue.Key].GetType().GetConstructor(types).Invoke(objectRefs[keyValue.Key], parameters);     //Wywołanie konstruktora dla każdego z deserializowanych obiektów
             }
             sr.Dispose();        
             return objectRefs["1"];
         }
 
-        private Type[] GetTypesFromProperties(PropertyInfo[] properties)
+        private Type[] GetTypesFromMembers(MemberInfo[] members)
         {
-            Type[] types = new Type[properties.Length];
+            Type[] types = new Type[members.Length];
             for(int i=0;i<types.Length;i++)
             {
-                types[i] = properties[i].PropertyType;
+                if(members[i].MemberType == MemberTypes.Field)
+                {
+                    types[i] = ((FieldInfo)members[i]).FieldType;
+                }
             }
             return types;
         }
