@@ -8,9 +8,10 @@ namespace Zadanie2
         public static void Zapisz(Kolekcje kolekcje)
         {
             if (File.Exists("Kolekcje.csv"))
+            {
                 File.Delete("Kolekcje.csv");
-            
-                Stream s = new FileStream("Kolekcje.csv", FileMode.Append, FileAccess.Write);
+            }
+            Stream s = new FileStream("Kolekcje.csv", FileMode.Append, FileAccess.Write);
                 CSVFormatter formatter = new CSVFormatter();
                 formatter.Serialize(s, kolekcje);
                 s.Close();

@@ -17,11 +17,10 @@ namespace Zadanie2
 
         public override object Deserialize(Stream serializationStream)
         {
-            Dictionary<string, object> objectRefs = new Dictionary<string, object>();
-            Dictionary<string, Type> RefsTypes = new Dictionary<string, Type>();
-            Dictionary<string, SerializationInfo> refsInfos = new Dictionary<string, SerializationInfo>();
-            Dictionary<objectInfoName, string> objectInfoNameRefs = new Dictionary<objectInfoName, string>();
-            List<Tuple<string, string, string>> referenceBuffer = new List<Tuple<string, string, string>>();
+            Dictionary<string, object> objectRefs = new Dictionary<string, object>();  //Id obiektu, obiekt na który wskazuje
+            Dictionary<string, Type> RefsTypes = new Dictionary<string, Type>();    //Id obiektu, typ obiektu na który wskazuje
+            Dictionary<string, SerializationInfo> refsInfos = new Dictionary<string, SerializationInfo>(); //Id obiektu, przypisane SerializationInfo
+            Dictionary<objectInfoName, string> objectInfoNameRefs = new Dictionary<objectInfoName, string>(); // Klucz - Id Obiektu wraz z InfoName, w którym znajduje się referencja Wartość - Id referencji 
 
             StreamReader sr = new StreamReader(serializationStream);
             string entry = "";
@@ -30,7 +29,7 @@ namespace Zadanie2
             {
                 lines.Add(entry);
             }
-            foreach(string line in lines)
+            foreach(string line in lines)   //Tworzenie niezainicjalizowanych obiektów, umieszczenie ich oraz ich typów w słownikach.
             {
                 string[] typeDataSplit = line.Split('#');
                 Type objType = Type.GetType(typeDataSplit[0]);
@@ -47,10 +46,10 @@ namespace Zadanie2
                 string[] keyValuePairs = typeDataSplit[1].Split(',');
                 string[] refSplit = keyValuePairs[0].Split(':');
                 PropertyInfo[] properties = RefsTypes[refSplit[1]].GetProperties();
-                Type[] types = GetTypesFromProperties(properties);
+                Type[] types = GetTypesFromProperties(properties);                  //Tablica zawierajaca typy pol obiektu
                 SerializationInfo info = new SerializationInfo(RefsTypes[refSplit[1]], new FormatterConverter());
                 refsInfos.Add(refSplit[1], info);
-                for (int i = 1; i < keyValuePairs.Length; i++)
+                for (int i = 1; i < keyValuePairs.Length; i++)  //Dodanie wartosci do SerializationInfo
                 {
                     string s = keyValuePairs[i];                   
                     string[] singleKeyValue = s.Split(';');
@@ -60,7 +59,7 @@ namespace Zadanie2
                         objectInfoName keyObjectInfo;
                         keyObjectInfo.obj = refSplit[1];
                         keyObjectInfo.infoName = infoName;
-                        objectInfoNameRefs[keyObjectInfo] = singleKeyValue[1];
+                        objectInfoNameRefs[keyObjectInfo] = singleKeyValue[1]; // Zapisanie informacji o referencji - IDObiektu,InfoName,IDReferencji
                     }
                     else
                     {
@@ -78,6 +77,10 @@ namespace Zadanie2
                         {
                             value = DateTime.Parse(singleKeyValue[1], CultureInfo.InvariantCulture);
                         }
+                        else
+                        {
+                            throw new NotImplementedException("Nie zaimplementowano deserializacji pola tego typu");
+                        }
                         info.AddValue(singleKeyValue[0], value);
                     }
                 }
@@ -89,14 +92,14 @@ namespace Zadanie2
                 string obj = pair.Key.obj;
                 string value = pair.Value;
                 string infoName = pair.Key.infoName;
-                refsInfos[obj].AddValue(infoName, objectRefs[value]);
+                refsInfos[obj].AddValue(infoName, objectRefs[value]);       // Dodanie referencji do SerialisationInfo
             }
 
             foreach (KeyValuePair<string, SerializationInfo> keyValue in refsInfos)
             {
                 Type[] constructorTypes = { typeof(SerializationInfo), typeof(StreamingContext) };
                 object[] constuctorParameters = { keyValue.Value, Context };
-                objectRefs[keyValue.Key].GetType().GetConstructor(constructorTypes).Invoke(objectRefs[keyValue.Key], constuctorParameters);
+                objectRefs[keyValue.Key].GetType().GetConstructor(constructorTypes).Invoke(objectRefs[keyValue.Key], constuctorParameters);     //Wywołanie konstruktora dla każdego z deserializowanych obiektów
             }
             sr.Dispose();        
             return objectRefs["1"];
@@ -145,6 +148,7 @@ namespace Zadanie2
             public string obj;
             public string infoName;
         }
+
     protected override void WriteArray(object obj, string name, Type memberType)
         {
             throw new NotImplementedException();

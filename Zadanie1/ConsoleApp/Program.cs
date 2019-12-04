@@ -29,7 +29,6 @@ namespace Zadanie2
                     {
                         Console.WriteLine("Nieprawidlowy format");
                     }
-                    Console.WriteLine(wybor);
                 } while (wybor < 0 || wybor > 7);
 
                 switch (wybor)
