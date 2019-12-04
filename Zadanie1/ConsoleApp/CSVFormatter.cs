@@ -20,7 +20,6 @@ namespace Zadanie2
             Dictionary<string, object> objectRefs = new Dictionary<string, object>();  //Id obiektu, obiekt na który wskazuje
             Dictionary<string, Type> RefsTypes = new Dictionary<string, Type>();    //Id obiektu, typ obiektu na który wskazuje
             Dictionary<string, SerializationInfo> refsInfos = new Dictionary<string, SerializationInfo>(); //Id obiektu, przypisane SerializationInfo
-            Dictionary<objectInfoName, string> objectInfoNameRefs = new Dictionary<objectInfoName, string>(); // Klucz - Id Obiektu wraz z InfoName, w którym znajduje się referencja Wartość - Id referencji 
 
             StreamReader sr = new StreamReader(serializationStream);
             string entry = "";
@@ -29,6 +28,7 @@ namespace Zadanie2
             {
                 lines.Add(entry);
             }
+
             foreach(string line in lines)   //Tworzenie niezainicjalizowanych obiektów, umieszczenie ich oraz ich typów w słownikach.
             {
                 string[] typeDataSplit = line.Split('#');
@@ -45,54 +45,47 @@ namespace Zadanie2
                 string[] typeDataSplit = line.Split('#');
                 string[] keyValuePairs = typeDataSplit[1].Split(',');
                 string[] refSplit = keyValuePairs[0].Split(':');
-                PropertyInfo[] properties = RefsTypes[refSplit[1]].GetProperties();
+
+                string objectID = refSplit[1];
+                PropertyInfo[] properties = RefsTypes[objectID].GetProperties();
                 Type[] types = GetTypesFromProperties(properties);                  //Tablica zawierajaca typy pol obiektu
-                SerializationInfo info = new SerializationInfo(RefsTypes[refSplit[1]], new FormatterConverter());
-                refsInfos.Add(refSplit[1], info);
+                SerializationInfo info = new SerializationInfo(RefsTypes[objectID], new FormatterConverter());
+                refsInfos.Add(objectID, info);
                 for (int i = 1; i < keyValuePairs.Length; i++)  //Dodanie wartosci do SerializationInfo
                 {
                     string s = keyValuePairs[i];                   
                     string[] singleKeyValue = s.Split(';');
-                    if(singleKeyValue[0].StartsWith("|ObjectReference|"))
+                    string key = singleKeyValue[0];
+                    string value = singleKeyValue[1];
+                    if(key.StartsWith("|ObjectReference|"))
                     {
-                       string infoName = singleKeyValue[0].Remove(0, 17);
-                        objectInfoName keyObjectInfo;
-                        keyObjectInfo.obj = refSplit[1];
-                        keyObjectInfo.infoName = infoName;
-                        objectInfoNameRefs[keyObjectInfo] = singleKeyValue[1]; // Zapisanie informacji o referencji - IDObiektu,InfoName,IDReferencji
+                       string infoName = key.Remove(0, 17);
+                       refsInfos[objectID].AddValue(infoName, objectRefs[value]);
                     }
                     else
                     {
                         Type keyType = types[i-1];
-                        object value = null;
+                        object returnedValue = null;
                         if(keyType == typeof(string))
                         {
-                            value = singleKeyValue[1];
+                            returnedValue = value;
                         }
                         else if(keyType == typeof(Single))
                         {
-                            value = Single.Parse(singleKeyValue[1], CultureInfo.InvariantCulture);
+                            returnedValue = Single.Parse(value, CultureInfo.InvariantCulture);
                         }
                         else if(keyType == typeof(DateTime))
                         {
-                            value = DateTime.Parse(singleKeyValue[1], CultureInfo.InvariantCulture);
+                            returnedValue = DateTime.Parse(value, CultureInfo.InvariantCulture);
                         }
                         else
                         {
                             throw new NotImplementedException("Nie zaimplementowano deserializacji pola tego typu");
                         }
-                        info.AddValue(singleKeyValue[0], value);
+                        info.AddValue(key, returnedValue);
                     }
                 }
 
-            }
-
-            foreach (KeyValuePair<objectInfoName,string> pair in objectInfoNameRefs)
-            {
-                string obj = pair.Key.obj;
-                string value = pair.Value;
-                string infoName = pair.Key.infoName;
-                refsInfos[obj].AddValue(infoName, objectRefs[value]);       // Dodanie referencji do SerialisationInfo
             }
 
             foreach (KeyValuePair<string, SerializationInfo> keyValue in refsInfos)
@@ -142,12 +135,6 @@ namespace Zadanie2
             }
         }
     }
-
-    private struct objectInfoName
-        {
-            public string obj;
-            public string infoName;
-        }
 
     protected override void WriteArray(object obj, string name, Type memberType)
         {
