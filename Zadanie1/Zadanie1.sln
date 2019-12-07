@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zadanie2", "ConsoleApp\Zada
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject2", "UnitTestProject2\UnitTestProject2.csproj", "{DE235300-A665-4ED9-876A-DD0AC9C96D12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary3", "ClassLibrary3\ClassLibrary3.csproj", "{655DF1B0-F703-47B0-8099-715221E38057}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,26 @@ Global
 		{DE235300-A665-4ED9-876A-DD0AC9C96D12}.Release|x64.Build.0 = Release|Any CPU
 		{DE235300-A665-4ED9-876A-DD0AC9C96D12}.Release|x86.ActiveCfg = Release|Any CPU
 		{DE235300-A665-4ED9-876A-DD0AC9C96D12}.Release|x86.Build.0 = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|ARM.Build.0 = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|x64.Build.0 = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Debug|x86.Build.0 = Debug|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|ARM.ActiveCfg = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|ARM.Build.0 = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|ARM64.Build.0 = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|x64.ActiveCfg = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|x64.Build.0 = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|x86.ActiveCfg = Release|Any CPU
+		{655DF1B0-F703-47B0-8099-715221E38057}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
