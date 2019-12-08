@@ -16,5 +16,13 @@ namespace Zadanie3TestProject
             Assert.AreEqual(list[0].ProductID, 316);
             Assert.AreEqual(list[0].Name, "Blade");
         }
+
+        [TestMethod]
+        public void TestGetProductsByVendorName()
+        {
+            List<Product> list = DBService.GetProductsByVendorName("International");
+            Assert.AreEqual(list.Count, 1);
+            Assert.AreEqual(list[0].ProductID, 462);
+        }
     }
 }
