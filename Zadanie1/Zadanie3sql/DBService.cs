@@ -52,12 +52,12 @@ namespace Zadanie3sql
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                List<string> returnedValue = (from product in db.Products
+                List<String> returnedValue = (from product in db.Products
                                              join productVendor in db.ProductVendors on product.ProductID equals productVendor.ProductID
                                              join vendor in db.Vendors on productVendor.BusinessEntityID equals vendor.BusinessEntityID
                                              where product.Name.Equals(productName)
                                              select vendor.Name).ToList();
-                return returnedValue.ToString();
+                return returnedValue[0];
             }
         }
 
@@ -106,8 +106,8 @@ namespace Zadanie3sql
                                               join productSubcategory in db.ProductSubcategories on product.ProductSubcategoryID equals productSubcategory.ProductSubcategoryID
                                               join productCategory in db.ProductCategories on productSubcategory.ProductCategoryID equals productCategory.ProductCategoryID
                                               where productCategory.Equals(category)
-                                              select product.ListPrice).ToList();
-                decimal tmp = 0;
+                                              select product.StandardCost).ToList();
+                decimal tmp = 0.0m;
                 foreach (int value in returnedValue)
                     tmp += value;
                 return (int) tmp;
