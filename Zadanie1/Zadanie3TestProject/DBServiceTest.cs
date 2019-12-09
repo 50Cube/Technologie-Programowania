@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie3sql;
-using System.Data.Linq;
 using System.Linq;
+using System.IO;
 
 namespace Zadanie3TestProject
 {
@@ -84,7 +84,44 @@ namespace Zadanie3TestProject
 
                 value = DBService.GetTotalStandardCostByCategory(category[0]);
             }
-            Assert.AreEqual(value, 92040);
+            Assert.AreEqual(value, 92092);
+        }
+
+        [TestMethod]
+        public void TestGetProductsWithoutCategoryDeclarative()
+        {
+            List<Product> list = ExtensionMethods.GetProductsWithoutCategoryDeclarative();
+            Assert.AreEqual(list.Count, 209);
+        }
+
+        [TestMethod]
+        public void TestGetProductsWithoutCategoryImperative()
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                List<Product> list = (from product in db.Products
+                                                  select product).ToList();
+                
+            list = ExtensionMethods.GetProductsWithoutCategoryImperative(list);
+            Assert.AreEqual(list.Count, 209);
+            }
+        }
+
+        [TestMethod]
+        public void TestGetProductsAndVendors()
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                List<Product> products = (from product in db.Products
+                                      select product).ToList();
+
+                List<ProductVendor> vendors = (from vendor in db.ProductVendors
+                                          select vendor).ToList();
+
+                string result = ExtensionMethods.GetProductsAndVendors(products, vendors);
+                string first = new StringReader(result).ReadLine();
+                Assert.AreEqual(first, "Adjustable Race-Litware, Inc.");
+            }
         }
     }
 }

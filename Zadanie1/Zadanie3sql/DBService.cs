@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Zadanie3sql
 {
@@ -102,15 +100,13 @@ namespace Zadanie3sql
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                List<decimal> returnedValue = (from product in db.Products
+                decimal returnedValue = (from product in db.Products
                                               join productSubcategory in db.ProductSubcategories on product.ProductSubcategoryID equals productSubcategory.ProductSubcategoryID
                                               join productCategory in db.ProductCategories on productSubcategory.ProductCategoryID equals productCategory.ProductCategoryID
                                               where productCategory.Equals(category)
-                                              select product.StandardCost).ToList();
-                decimal tmp = 0.0m;
-                foreach (int value in returnedValue)
-                    tmp += value;
-                return (int) tmp;
+                                              select product.StandardCost).ToList().Sum();
+
+                return (int) returnedValue;
             }
         }
     }
