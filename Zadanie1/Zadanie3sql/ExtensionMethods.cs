@@ -1,11 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-<<<<<<< HEAD
-=======
 using System.Threading.Tasks;
->>>>>>> master
 
 namespace Zadanie3sql
 {
@@ -39,11 +36,7 @@ namespace Zadanie3sql
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 List<Product> returnedList = (from product in db.Products
-<<<<<<< HEAD
-                                              select product).Skip(size * (number - 1)).Take(size).ToList();
-=======
                                               select product).Skip(size * (number-1)).Take(size).ToList();
->>>>>>> master
 
                 return returnedList;
             }
@@ -60,13 +53,8 @@ namespace Zadanie3sql
         {
             StringBuilder result = new StringBuilder();
             var returnedValue = (from product in products
-<<<<<<< HEAD
-                                 join vendor in vendors on product.ProductID equals vendor.ProductID
-                                 select new { productName = product.Name, vendorName = vendor.Vendor.Name }).ToList();
-=======
                                            join vendor in vendors on product.ProductID equals vendor.ProductID
                                            select new { productName = product.Name, vendorName = vendor.Vendor.Name }).ToList();
->>>>>>> master
 
             foreach (var x in returnedValue)
                 result.Append(x.productName + "-" + x.vendorName + "\n");
