@@ -30,5 +30,23 @@ namespace Zadanie3sql
                 }
             }
         }
+
+        public List<MyProduct> GetProductsByVendorName(string vendorName)
+        {
+            List<MyProduct> returnedList = (from product in myProducts
+                                          where product.vendorName.Equals(vendorName)
+                                          select product).ToList();
+            return returnedList;
+        }
+
+        public  List<MyProduct> GetProductsByName(string namePart)
+        {
+            List<MyProduct> returnedList = (from product in myProducts
+                                where product.Name.Contains(namePart)
+                                select product).ToList();
+                return returnedList;
+        }
+
+
     }
 }

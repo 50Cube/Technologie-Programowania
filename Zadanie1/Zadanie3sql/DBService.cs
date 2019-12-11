@@ -11,9 +11,7 @@ namespace Zadanie3sql
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                List<Product> returnedList;
-                Table<Product> productTable = db.GetTable<Product>();
-                returnedList = (from product in productTable
+                List<Product> returnedList = (from product in db.Products
                                 where product.Name.Contains(namePart)
                                 select product).ToList();
                 return returnedList;
