@@ -7,13 +7,20 @@ namespace Zadanie3sql
 {
     public class DBService
     {
+        public static List<Product> GetAllProducts()
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                List<Product> returnedList = (from product in db.Products                              
+                                              select product).ToList();
+                return returnedList;
+            }
+        }
         public static List<Product> GetProductsByName(string namePart)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                List<Product> returnedList;
-                Table<Product> productTable = db.GetTable<Product>();
-                returnedList = (from product in productTable
+                List<Product> returnedList = (from product in db.Products
                                 where product.Name.Contains(namePart)
                                 select product).ToList();
                 return returnedList;
@@ -63,10 +70,9 @@ namespace Zadanie3sql
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                List<Product> returnedList = (from productReview in db.ProductReviews
-                                              join product in db.Products on productReview.ProductID equals product.ProductID
-                                              orderby productReview.ReviewDate
-                                              select product).Take(howManyReviews).ToList();
+                List<Product> returnedList = (from product in db.Products
+                                              where product.ProductReviews.Count.Equals(howManyReviews)
+                                              select product).ToList();
                 return returnedList;
             }
         }

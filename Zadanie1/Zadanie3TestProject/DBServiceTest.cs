@@ -13,6 +13,7 @@ namespace Zadanie3TestProject
         [TestMethod]
         public void TestGetProductsByName()
         {
+            List<Product> list1 = DBService.GetAllProducts();
             List<Product> list = DBService.GetProductsByName("Blade");
             Assert.AreEqual(list.Count, 1);
             Assert.AreEqual(list[0].ProductID, 316);
@@ -46,9 +47,8 @@ namespace Zadanie3TestProject
         public void TestGetProductsWithNRecentReviews()
         {
             List<Product> list = DBService.GetProductsWithNRecentReviews(2);
-            Assert.AreEqual(list.Count, 2);
-            Assert.AreEqual(list[0].ProductID, 709);
-            Assert.AreEqual(list[1].ProductID, 937);
+            Assert.AreEqual(list.Count, 1);
+            Assert.AreEqual(list[0].ProductID, 937);
         }
 
         [TestMethod]
@@ -122,6 +122,35 @@ namespace Zadanie3TestProject
                 string first = new StringReader(result).ReadLine();
                 Assert.AreEqual(first, "Adjustable Race-Litware, Inc.");
             }
+        }
+
+        [TestMethod]
+        public void TestGetMyProductsByName()
+        {
+            MyProductRepository mpr = new MyProductRepository();
+            List<MyProduct> list = mpr.GetProductsByName("Decal");
+            Assert.AreEqual(list.Count, 2);
+            Assert.AreEqual(list[0].ProductID, 325);
+            Assert.AreEqual(list[0].Name, "Decal 1");
+        }
+
+        [TestMethod]
+        public void TestGetMyProductsByVendorName()
+        {
+            MyProductRepository mpr = new MyProductRepository();
+            List<MyProduct> list = mpr.GetProductsByVendorName("Lindell");
+            Assert.AreEqual(list.Count, 2);
+            Assert.AreEqual(list[0].ProductID, 490);
+            Assert.AreEqual(list[0].Name, "LL Nipple");
+        }
+
+        [TestMethod]
+        public void TestGetMyProductsWithNRecentReviews()
+        {
+            MyProductRepository mpr = new MyProductRepository();
+            List<MyProduct> list = mpr.GetProductsWithNRecentReviews(2);
+            Assert.AreEqual(list.Count, 1);
+            Assert.AreEqual(list[0].ProductID, 937);
         }
     }
 }
