@@ -7,6 +7,15 @@ namespace Zadanie3sql
 {
     public class DBService
     {
+        public static List<Product> GetAllProducts()
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                List<Product> returnedList = (from product in db.Products                              
+                                              select product).ToList();
+                return returnedList;
+            }
+        }
         public static List<Product> GetProductsByName(string namePart)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())

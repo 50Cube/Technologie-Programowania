@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie3sql
 {
-    class MyProductRepository
+    public class MyProductRepository
     {
         List<MyProduct> myProducts { get; set; }
 
@@ -21,12 +21,14 @@ namespace Zadanie3sql
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 var productVendorPair = (from product in db.Products
-                                     join vendor in db.ProductVendors on product.ProductID equals vendor.ProductID
-                                     select new { product, vendorName = vendor.Vendor.Name }).ToList();
+                                         join vendor in db.ProductVendors on product.ProductID equals vendor.ProductID
+                                         select new { product, vendorName = vendor.Vendor.Name }).ToList();
+
 
                 foreach (var x in productVendorPair)
                 {
-                    myProducts.Add(new MyProduct(x.product, x.vendorName));
+                    decimal tax = x.product.StandardCost * 0.1m;
+                    myProducts.Add(new MyProduct(x.product, tax, x.vendorName));
                 }
             }
         }
@@ -47,6 +49,12 @@ namespace Zadanie3sql
                 return returnedList;
         }
 
-
+        public  List<MyProduct> GetProductsWithNRecentReviews(int howManyReviews)
+        {
+            List<MyProduct> returnedList = (from product in myProducts
+                    where product.ProductReviews.Count.Equals(howManyReviews)
+                    select product).ToList();
+            return returnedList;
+        }
     }
 }
