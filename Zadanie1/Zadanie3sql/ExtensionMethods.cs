@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,7 +57,9 @@ namespace Zadanie3sql
                                            select new { productName = product.Name, vendorName = vendor.Vendor.Name }).ToList();
 
             foreach (var x in returnedValue)
-                result.Append(x.productName + "-" + x.vendorName + "\n");
+            {
+                result.AppendLine(x.productName + "-" + x.vendorName);
+            }
 
             return result.ToString();
         }
