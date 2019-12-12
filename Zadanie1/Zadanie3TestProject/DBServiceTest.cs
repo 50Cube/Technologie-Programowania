@@ -87,11 +87,19 @@ namespace Zadanie3TestProject
             Assert.AreEqual(value, 92092);
         }
 
+
+
         [TestMethod]
         public void TestGetProductsWithoutCategoryDeclarative()
         {
-            List<Product> list = ExtensionMethods.GetProductsWithoutCategoryDeclarative();
-            Assert.AreEqual(list.Count, 209);
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                List<Product> list = (from product in db.Products
+                                      select product).ToList();
+
+                list = ExtensionMethods.GetProductsWithoutCategoryDeclarative(list);
+                Assert.AreEqual(list.Count, 209);
+            }
         }
 
         [TestMethod]
@@ -123,6 +131,7 @@ namespace Zadanie3TestProject
                 Assert.AreEqual(first, "Adjustable Race-Litware, Inc.");
             }
         }
+
 
         [TestMethod]
         public void TestGetMyProductsByName()

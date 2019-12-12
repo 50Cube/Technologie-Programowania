@@ -2,51 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Zadanie3sql
 {
     public static class ExtensionMethods
     {
-        public static List<Product> GetProductsWithoutCategoryDeclarative()
+        public static List<Product> GetProductsWithoutCategoryDeclarative(this List<Product> products)
         {
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                List<Product> returnedList = (from product in db.Products
-                                              where product.ProductSubcategoryID.Equals(null)
-                                              select product).ToList();
-                return returnedList;
-            }
+                return (from product in products
+                        where product.ProductSubcategoryID.Equals(null)
+                        select product).ToList();
         }
 
-        public static List<Product> GetProductsWithoutCategoryImperative(this List<Product> list)
+        public static List<Product> GetProductsWithoutCategoryImperative(this List<Product> products)
         {
-            List<Product> returnedList = new List<Product>();
-
-            foreach (Product product in list)
-                if (product.ProductSubcategoryID.Equals(null))
-                    returnedList.Add(product);
-
-            return returnedList;
+            return products.Where(product => product.ProductSubcategoryID.Equals(null)).ToList();
         }
 
-        public static List<Product> GetProductsSiteDeclarative(int size, int number)
-        {
-            if (size < 0 || number < 1) throw new Exception("Wrong argument");
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                List<Product> returnedList = (from product in db.Products
-                                              select product).Skip(size * (number-1)).Take(size).ToList();
-
-                return returnedList;
-            }
-        }
-
-        public static List<Product> GetProductsSiteImperative(this List<Product> list, int size, int number)
+        public static List<Product> GetProductsSiteDeclarative(this List<Product> products, int size, int number)
         {
             if (size < 0 || number < 1) throw new Exception("Wrong argument");
 
-            return list.Skip(size * (number - 1)).Take(size).ToList();
+                return (from product in products
+                        select product).Skip(size * (number-1)).Take(size).ToList();
+        }
+
+        public static List<Product> GetProductsSiteImperative(this List<Product> products, int size, int number)
+        {
+            if (size < 0 || number < 1) throw new Exception("Wrong argument");
+
+            return products.Skip(size * (number - 1)).Take(size).ToList();
         }
 
         public static string GetProductsAndVendors(this List<Product> products, List<ProductVendor> vendors)
