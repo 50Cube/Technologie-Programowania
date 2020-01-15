@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Model
 {
-    class DataContext : IDataContext<Product>
+    public class DataContext : IDataContext<Product>
     {
         private DataClassesDataContext Database;
 

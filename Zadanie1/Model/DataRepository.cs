@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class DataRepository : IDataRepository<Product>
+    public class DataRepository : IDataRepository<Product>
     {
         private IDataContext<Product> DataContext;
 
