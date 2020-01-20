@@ -3,10 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <vm:ViewModelClass />
+    </Window.DataContext>
+    
     <Grid>
-        
+        <ListView ItemsSource="{Binding Products}" SelectedItem="{Binding Product}" Width="400" HorizontalAlignment="Left">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding ProductID, StringFormat='ID: {0}'}"/>
+                        <TextBlock Text="{Binding Name, StringFormat='Name: {0}'}" Height="30"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView  Width="380" HorizontalAlignment="Right">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding ProductID, StringFormat='ID: {0}'}"/>
+                        <Label Content="{Binding Name, StringFormat='Name: {0}'}"/>
+                        <Label Content="{Binding ProductNumber, StringFormat='Product number: {0}'}"/>
+                        <Label Content="{Binding Color, StringFormat='Color: {0}'}"/>
+                        <Label Content="{Binding SafetyStockLevel, StringFormat='Safety rocket level: {0}'}"/>
+                        <Label Content="{Binding ReorderPoint, StringFormat='Reorder point: {0}'}"/>
+                        <Label Content="{Binding StandardCost, StringFormat='Standard cost: {0}'}"/>
+                        <Label Content="{Binding ListPrice, StringFormat='List price: {0}'}"/>
+                        <Label Content="{Binding Size, StringFormat='Size: {0}'}"/>
+                        <Label Content="{Binding Weight, StringFormat='Weight: {0}'}"/>
+                        <Label Content="{Binding DaysToManufacture, StringFormat='Days to manufacture: {0}'}"/>
+                        <Label Content="{Binding ProductSubcategoryID, StringFormat='Subcategory ID: {0}'}"/>
+                        <Label Content="{Binding ProdctModelID, StringFormat='Model ID: {0}'}"/>
+                        <Label Content="{Binding SellStartDate, StringFormat='Sell start date: {0}'}"/>
+                        <Label Content="{Binding SellEndDate, StringFormat='Sell end date: {0}'}"/>
+                        <Label Content="{Binding ModifiedDate, StringFormat='Modified date: {0}'}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>
