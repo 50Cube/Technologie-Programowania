@@ -11,7 +11,7 @@
     <Window.DataContext>
         <vm:ViewModelClass />
     </Window.DataContext>
-    
+
     <Grid>
         <ListView ItemsSource="{Binding Products}" SelectedItem="{Binding Product}" Width="400" HorizontalAlignment="Left">
             <ListView.ItemTemplate>
@@ -24,7 +24,13 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView  Width="380" HorizontalAlignment="Right">
+        <Grid Width="380" Height="350" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <TextBlock Text="Displayed&#x0a;Details" />
+        </Grid>
+
+        <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Add new product" />
+        <Button Width="190" Height="80" Margin="0,0,195,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" />
+        <!--<ListView  Width="380" Height="300" HorizontalAlignment="Right" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -47,6 +53,6 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
     </Grid>
 </Window>
