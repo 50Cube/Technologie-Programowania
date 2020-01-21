@@ -28,7 +28,7 @@
             <TextBlock Text="Displayed&#x0a;Details" />
         </Grid>
 
-        <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Add new product" />
+        <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Add new product" Command="{Binding ShowAddWindow}"/>
         <Button Width="190" Height="80" Margin="0,0,195,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" />
         <!--<ListView  Width="380" Height="300" HorizontalAlignment="Right" >
             <ListView.ItemTemplate>

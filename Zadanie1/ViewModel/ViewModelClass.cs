@@ -19,6 +19,7 @@ namespace ViewModel
             DataRepository = new DataRepository();
             Products = DataRepository.GetAll().ToList();
             Product = new Product();
+            DisplayAddWindow = new MyCommand(ShowAddWindow);
         }
 
         public Product Product
@@ -43,14 +44,16 @@ namespace ViewModel
             }
         }
 
-
-        public ICommand AddProductCommand { get; set; }
-        public ICommand UpdateProductCommand { get; set; }
-        public ICommand DeleteProductCommand { get; set; }
+        public MyCommand DisplayAddWindow { get; set; }
 
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void ShowAddWindow()
+        {
+
         }
     }
 }
