@@ -1,5 +1,6 @@
 ﻿using Model;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,12 +13,12 @@ namespace ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         private DataRepository DataRepository { get; set; }
         private Product product;
-        private List<Product> products;
+        private ObservableCollection<Product> products;
 
         public ViewModelClass()
         {
             DataRepository = new DataRepository();
-            Products = DataRepository.GetAll().ToList();
+            Products = new ObservableCollection<Product>(DataRepository.GetAll().ToList());
             Product = new Product();
             DisplayAddWindow = new MyCommand(ShowAddWindow);
             ShowInfo = new RelayCommand(ShowInfoWindow);
@@ -47,7 +48,7 @@ namespace ViewModel
             }
         }
 
-        public List<Product> Products
+        public ObservableCollection<Product> Products
         {
             get => products;
 

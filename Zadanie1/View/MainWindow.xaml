@@ -25,17 +25,14 @@
         </ListView>
 
         <Grid Width="380" Height="350" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <TextBlock Text="Displayed&#x0a;Details" />
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding Product.Name}" Grid.Column="0" Grid.Row="0" />
+            <TextBlock Text="{Binding Product.Name}" Grid.Column="0" Grid.Row="1" />
+
         </Grid>
-        <ListView  Width="380" Height="300" HorizontalAlignment="Right" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <Label Content="{Binding ProductID, StringFormat='ID: {0}'}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
         <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Add new product" Command="{Binding ShowAddWindow}"/>
         <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Display info" Command="{Binding ShowInfo}"/>
         <Button Width="190" Height="80" Margin="0,0,195,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" />
