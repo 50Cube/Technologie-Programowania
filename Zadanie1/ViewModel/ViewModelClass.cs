@@ -20,6 +20,20 @@ namespace ViewModel
             Products = DataRepository.GetAll().ToList();
             Product = new Product();
             DisplayAddWindow = new MyCommand(ShowAddWindow);
+            ShowInfo = new RelayCommand(ShowInfoWindow);
+        }
+
+        public ICommand ShowInfo
+        {
+            get; private set;
+        }
+
+        public System.Lazy<IWindow> ChildWindow { get; set; }
+
+        private void ShowInfoWindow()
+        {
+            IWindow _child = ChildWindow.Value;
+            _child.Show();
         }
 
         public Product Product

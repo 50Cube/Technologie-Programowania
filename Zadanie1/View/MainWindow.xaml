@@ -27,32 +27,18 @@
         <Grid Width="380" Height="350" HorizontalAlignment="Right" VerticalAlignment="Top">
             <TextBlock Text="Displayed&#x0a;Details" />
         </Grid>
-
-        <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Add new product" Command="{Binding ShowAddWindow}"/>
-        <Button Width="190" Height="80" Margin="0,0,195,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" />
-        <!--<ListView  Width="380" Height="300" HorizontalAlignment="Right" >
+        <ListView  Width="380" Height="300" HorizontalAlignment="Right" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <Label Content="{Binding ProductID, StringFormat='ID: {0}'}"/>
-                        <Label Content="{Binding Name, StringFormat='Name: {0}'}"/>
-                        <Label Content="{Binding ProductNumber, StringFormat='Product number: {0}'}"/>
-                        <Label Content="{Binding Color, StringFormat='Color: {0}'}"/>
-                        <Label Content="{Binding SafetyStockLevel, StringFormat='Safety rocket level: {0}'}"/>
-                        <Label Content="{Binding ReorderPoint, StringFormat='Reorder point: {0}'}"/>
-                        <Label Content="{Binding StandardCost, StringFormat='Standard cost: {0}'}"/>
-                        <Label Content="{Binding ListPrice, StringFormat='List price: {0}'}"/>
-                        <Label Content="{Binding Size, StringFormat='Size: {0}'}"/>
-                        <Label Content="{Binding Weight, StringFormat='Weight: {0}'}"/>
-                        <Label Content="{Binding DaysToManufacture, StringFormat='Days to manufacture: {0}'}"/>
-                        <Label Content="{Binding ProductSubcategoryID, StringFormat='Subcategory ID: {0}'}"/>
-                        <Label Content="{Binding ProdctModelID, StringFormat='Model ID: {0}'}"/>
-                        <Label Content="{Binding SellStartDate, StringFormat='Sell start date: {0}'}"/>
-                        <Label Content="{Binding SellEndDate, StringFormat='Sell end date: {0}'}"/>
-                        <Label Content="{Binding ModifiedDate, StringFormat='Modified date: {0}'}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>-->
+        </ListView>
+        <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Add new product" Command="{Binding ShowAddWindow}"/>
+        <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Display info" Command="{Binding ShowInfo}"/>
+        <Button Width="190" Height="80" Margin="0,0,195,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" />
+        
     </Grid>
 </Window>

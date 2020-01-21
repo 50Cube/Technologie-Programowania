@@ -10,27 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViewModel;
 namespace View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ShowInfoWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ShowInfoWindow : Window, IWindow
     {
-        public MainWindow()
+        public ShowInfoWindow()
         {
             InitializeComponent();
-        }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-            ViewModelClass _vm = (ViewModelClass)DataContext;
-            _vm.ChildWindow = new Lazy<IWindow>(() => new ShowInfoWindow());
-
         }
     }
 }
