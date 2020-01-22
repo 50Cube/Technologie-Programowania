@@ -4,10 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
+        xmlns:vr="clr-namespace:View.Validator"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="UpdateWindow" Height="300" Width="500" ResizeMode="NoResize">
-
+    <Window.Resources>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="10">Validation error</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+    </Window.Resources>
     <Window.DataContext>
         <vm:ViewModelClass />
     </Window.DataContext>
@@ -27,25 +35,76 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        
+
         <Label Content="Enter ID of chosen product" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1"/>
+        <TextBox Name="IDTB"  Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding ID}" Grid.Row="0" Grid.Column="1"/>
 
         <Label Content="New name" Grid.Row="2" Grid.Column="0"/>
-        <TextBox Text="{Binding Name}" Grid.Row="2" Grid.Column="1"/>
-
+        <TextBox Name="NameTB"  Validation.ErrorTemplate="{StaticResource validationTemplate}" Grid.Row="2" Grid.Column="1">
+            <TextBox.Text>
+                <Binding Path="Name" 
+                                UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:StringValidator Min="1" Max="50"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+         </TextBox>
         <Label Content="New product number" Grid.Row="3" Grid.Column="0"/>
-        <TextBox Text="{Binding ProductNumber}" Grid.Row="3" Grid.Column="1"/>
-
+        <TextBox Name="ProductNumberTB"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  Grid.Row="3" Grid.Column="1">
+            <TextBox.Text>
+                <Binding Path="ProductNumber" 
+                             UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:StringValidator Min="1" Max="25"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="New color" Grid.Row="4" Grid.Column="0"/>
-        <TextBox Text="{Binding Color}" Grid.Row="4" Grid.Column="1"/>
-
+        <TextBox  Name="ColorTB"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  Grid.Row="4" Grid.Column="1">
+            <TextBox.Text>
+                <Binding Path="Color" 
+                             UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:StringValidator Min="0" Max="15"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="New standard cost" Grid.Row="5" Grid.Column="0"/>
-        <TextBox Text="{Binding StandartCost}" Grid.Row="5" Grid.Column="1"/>
-
+        <TextBox  Name="StandardCostTB"  Validation.ErrorTemplate="{StaticResource validationTemplate}" Grid.Row="5" Grid.Column="1">
+            <TextBox.Text>
+                <Binding Path="StandardCost" 
+                                 UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:DecimalValidator />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="New list price" Grid.Row="6" Grid.Column="0"/>
-        <TextBox Text="{Binding ListPrice}" Grid.Row="6" Grid.Column="1"/>
+        <TextBox  Name="ListPriceTB"  Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding ListPrice}" Grid.Row="6" Grid.Column="1"/>
 
-        <Button Content="Save changes" Command="{Binding UpdateProductCommand}" Grid.Row="7" Width="120" HorizontalAlignment="Center"/>
+        <Button Content="Save changes" Command="{Binding UpdateProductCommand}" Grid.Row="7" Width="120" HorizontalAlignment="Center">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NameTB}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ProductNumberTB}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ColorTB}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ListPriceTB}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StandardCostTB}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IDTB}" Value="False"/>
+                        </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>
