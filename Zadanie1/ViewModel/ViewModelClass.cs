@@ -21,6 +21,7 @@ namespace ViewModel
             DataRepository = new DataRepository();
             Products = new ObservableCollection<Product>(DataRepository.GetAll().ToList());
             Product = new Product();
+            RefreshList = new MyCommand(Refresh);
             ShowAddWindow = new MyCommand(DisplayAddWindow);
             DeleteCommand = new MyCommand(DeleteProduct);
             AddProductCommand = new MyCommand(AddNewProduct);
@@ -49,6 +50,7 @@ namespace ViewModel
         }
 
         public ICommand ShowAddWindow { get; private set; }
+        public ICommand RefreshList { get; private set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddProductCommand { get; set; }
         
