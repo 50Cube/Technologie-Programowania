@@ -82,7 +82,7 @@ namespace ViewModel
                 ProductSubcategoryID = _ProductSubcategoryID,
                 ProductModelID = _ProductModelID,
                 SellStartDate = DateTime.Now,
-                SellEndDate = DateTime.Now,
+                SellEndDate = _SellEndDate,
                 rowguid = Guid.NewGuid(),
                 ModifiedDate = DateTime.Now
             };
@@ -100,24 +100,22 @@ namespace ViewModel
         private bool _MakeFlag;
         private bool _FinishedGoodsFlag;
         private string _Color;
-        private short _SafetyStockLevel;
-        private short _ReorderPoint;
+        private short _SafetyStockLevel = 1;
+        private short _ReorderPoint = 1;
         private decimal _StandardCost;
         private decimal _ListPrice;
         private string _Size;
         private string _SizeUnitMeasureCode;
         private string _WeightUnitMeasureCode;
-        private decimal _Weight;
+        private decimal _Weight = 1;
         private int _DaysToManufacture;
         private string _ProductLine;
         private string _Class;
         private string _Style;
-        private int _ProductSubcategoryID;
-        private int _ProductModelID;
-        //private DateTime _SellStartDate;
-        private DateTime _SellEndDate;
+        private int? _ProductSubcategoryID;
+        private int? _ProductModelID;
+        private DateTime? _SellEndDate;
         private Guid _Rowguid = new Guid();
-        //private DateTime _ModifiedDate;
 
         public string Name
         {
@@ -221,35 +219,23 @@ namespace ViewModel
             set { _Style = value; RaisePropertyChanged("Style"); }
         }
 
-        public int ProductSubcategoryID
+        public int? ProductSubcategoryID
         {
             get => _ProductSubcategoryID;
             set { _ProductSubcategoryID = value; RaisePropertyChanged("ProductSubcategoryID"); }
         }
 
-        public int ProductModelID
+        public int? ProductModelID
         {
             get => _ProductModelID;
             set { _ProductModelID = value; RaisePropertyChanged("ProductModelID"); }
         }
 
-        //public DateTime SellStartDate
-        //{
-        //    get => _SellStartDate;
-        //    set { _SellStartDate = value; RaisePropertyChanged("SellStartDate"); }
-        //}
-
-        public DateTime SellEndDate
+        public DateTime? SellEndDate
         {
             get => _SellEndDate;
             set { _SellEndDate = value; RaisePropertyChanged("SellEndDate"); }
         }
-
-        //public DateTime ModifiedDate
-        //{
-        //    get => _ModifiedDate;
-        //    set { _ModifiedDate = value; RaisePropertyChanged("ModifiedDate"); }
-        //}
         #endregion
     }
 }

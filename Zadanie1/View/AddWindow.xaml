@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Add new product" Height="780" Width="420" ResizeMode="NoResize">
+        Title="Add new product" Height="680" Width="420" ResizeMode="NoResize">
 
     <Window.DataContext>
         <vm:ViewModelClass />
@@ -101,18 +101,9 @@
         <Label Content="Product Model ID" Grid.Column="0" Grid.Row="18"/>
         <TextBox Text="{Binding ProductModelID}" Grid.Column="1" Grid.Row="18"/>
 
-        <!--<Label Content="Sell start date" Grid.Column="0" Grid.Row="19"/>
-        <DatePicker SelectedDate="{Binding Product.SellStartDate}" Grid.Column="1" Grid.Row="19"/>-->
+        <Label Content="Sell end date" Grid.Column="0" Grid.Row="19"/>
+        <DatePicker SelectedDate="{Binding SellEndDate}" Grid.Column="1" Grid.Row="19"/>
 
-        <!--<Label Content="Sell end date" Grid.Column="0" Grid.Row="20"/>
-        <DatePicker SelectedDate="{Binding Product.SellEndDate}" Grid.Column="1" Grid.Row="20"/>-->
-        
-        <!--<Label Content="Discontinued date" Grid.Column="0" Grid.Row="21"/>
-        <DatePicker SelectedDate="{Binding Product.DiscontinuedDate}" Grid.Column="1" Grid.Row="21"/>
-
-        <Label Content="Modified date" Grid.Column="0" Grid.Row="22"/>
-        <DatePicker SelectedDate="{Binding Product.ModifiedDate}" Grid.Column="1" Grid.Row="22"/>-->
-
-        <Button Content="Save" Command="{Binding AddProductCommand}" Grid.Row="23" Width="100" HorizontalAlignment="Center"/>
+        <Button Content="Save" Command="{Binding AddProductCommand}" Grid.Row="20" Width="100" HorizontalAlignment="Center"/>
     </Grid>
 </Window>
