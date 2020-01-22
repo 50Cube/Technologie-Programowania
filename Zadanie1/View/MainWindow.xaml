@@ -26,13 +26,29 @@
 
         <Grid Width="380" Height="350" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding Product.Name}" Grid.Column="0" Grid.Row="0" />
-            <TextBlock Text="{Binding Product.Name}" Grid.Column="0" Grid.Row="1" />
-
+            <TextBlock Text="{Binding Product.Name, StringFormat='Name: {0}'}" Grid.Row="0"/>
+            <TextBlock Text="{Binding Product.ProductNumber, StringFormat='Product number: {0}'}" Grid.Row="1"/>
+            <TextBlock Text="{Binding Product.Color, StringFormat='Color: {0}'}" Grid.Row="2"/>
+            <TextBlock Text="{Binding Product.StandardCost, StringFormat='Standard cost: {0}'}" Grid.Row="3"/>
+            <TextBlock Text="{Binding Product.ListPrice, StringFormat='List price: {0}'}" Grid.Row="4"/>
+            <TextBlock Text="{Binding Product.Size, StringFormat='Size: {0}'}" Grid.Row="5"/>
+            <TextBlock Text="{Binding Product.Weight, StringFormat='Weight: {0}'}" Grid.Row="6"/>
+            <TextBlock Text="{Binding Product.ProductSubcategoryID, StringFormat='Product subcategory ID: {0}'}" Grid.Row="7"/>
+            <TextBlock Text="{Binding Product.ProductModelID, StringFormat='Product model ID: {0}'}" Grid.Row="8"/>
+            <TextBlock Text="{Binding Product.SellEndDate, StringFormat='Sell end date: {0}'}" Grid.Row="9"/>
         </Grid>
+
         <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" Command="{Binding ShowAddWindow}"/>
         <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Add new product" Command="{Binding ShowAddWindow}"/>
         <Button Width="190" Height="80" Margin="0,0,195,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" />
