@@ -1,5 +1,4 @@
 ﻿using Model;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -20,21 +19,20 @@ namespace ViewModel
             DataRepository = new DataRepository();
             Products = new ObservableCollection<Product>(DataRepository.GetAll().ToList());
             Product = new Product();
-            DisplayAddWindow = new MyCommand(ShowAddWindow);
-            ShowInfo = new RelayCommand(ShowInfoWindow);
+            ShowAddWindow = new MyCommand(DisplayAddWindow);
         }
 
-        public ICommand ShowInfo
+        public ICommand ShowAddWindow
         {
             get; private set;
         }
 
-        public System.Lazy<IWindow> ChildWindow { get; set; }
+        public System.Lazy<IWindow> AddWindow { get; set; }
 
-        private void ShowInfoWindow()
+        private void DisplayAddWindow()
         {
-            IWindow _child = ChildWindow.Value;
-            _child.Show();
+            IWindow window = AddWindow.Value;
+            window.Show();
         }
 
         public Product Product
@@ -59,16 +57,9 @@ namespace ViewModel
             }
         }
 
-        public MyCommand DisplayAddWindow { get; set; }
-
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void ShowAddWindow()
-        {
-
         }
     }
 }

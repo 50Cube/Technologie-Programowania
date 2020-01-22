@@ -29,7 +29,7 @@ namespace View
         {
             base.OnInitialized(e);
             ViewModelClass _vm = (ViewModelClass)DataContext;
-            _vm.ChildWindow = new Lazy<IWindow>(() => new ShowInfoWindow());
+            _vm.AddWindow = new Lazy<IWindow>(() => new AddWindow());
 
         }
     }

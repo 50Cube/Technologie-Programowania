@@ -1,4 +1,4 @@
-﻿<Window x:Class="View.Window1"
+﻿<Window x:Class="View.AddWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,13 +6,113 @@
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Add new product" Height="780" Width="420" ResizeMode="NoResize">
 
     <Window.DataContext>
         <vm:ViewModelClass />
     </Window.DataContext>
     
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
         
+        <Label Content="Name" Grid.Column="0" Grid.Row="0"/>
+        <TextBox Text="{Binding Product.Name}" Grid.Column="1" Grid.Row="0"/>
+        
+        <Label Content="Product number" Grid.Column="0" Grid.Row="1"/>
+        <TextBox Grid.Column="1" Grid.Row="1"/>
+        
+        <Label Content="Make flag" Grid.Column="0" Grid.Row="2"/>
+        <TextBox Grid.Column="1" Grid.Row="2"/>
+
+        <Label Content="Finished goods flag" Grid.Column="0" Grid.Row="3"/>
+        <TextBox Grid.Column="1" Grid.Row="3"/>
+
+        <Label Content="Color" Grid.Column="0" Grid.Row="4"/>
+        <TextBox Grid.Column="1" Grid.Row="4"/>
+
+        <Label Content="Safety stock level" Grid.Column="0" Grid.Row="5"/>
+        <TextBox Grid.Column="1" Grid.Row="5"/>
+
+        <Label Content="Reorder point" Grid.Column="0" Grid.Row="6"/>
+        <TextBox Grid.Column="1" Grid.Row="6"/>
+
+        <Label Content="Standard cost" Grid.Column="0" Grid.Row="7"/>
+        <TextBox Grid.Column="1" Grid.Row="7"/>
+
+        <Label Content="List price" Grid.Column="0" Grid.Row="8"/>
+        <TextBox Grid.Column="1" Grid.Row="8"/>
+
+        <Label Content="Size" Grid.Column="0" Grid.Row="9"/>
+        <TextBox Grid.Column="1" Grid.Row="9"/>
+
+        <Label Content="Size unit measure code" Grid.Column="0" Grid.Row="10"/>
+        <TextBox Grid.Column="1" Grid.Row="10"/>
+
+        <Label Content="Weight unit measure code" Grid.Column="0" Grid.Row="11"/>
+        <TextBox Grid.Column="1" Grid.Row="11"/>
+
+        <Label Content="Weight" Grid.Column="0" Grid.Row="12"/>
+        <TextBox Grid.Column="1" Grid.Row="12"/>
+
+        <Label Content="Days to manufacture" Grid.Column="0" Grid.Row="13"/>
+        <TextBox Grid.Column="1" Grid.Row="13"/>
+
+        <Label Content="Product line" Grid.Column="0" Grid.Row="14"/>
+        <TextBox Grid.Column="1" Grid.Row="14"/>
+
+        <Label Content="Class" Grid.Column="0" Grid.Row="15"/>
+        <TextBox Grid.Column="1" Grid.Row="15"/>
+
+        <Label Content="Style" Grid.Column="0" Grid.Row="16"/>
+        <TextBox Grid.Column="1" Grid.Row="16"/>
+
+        <Label Content="Product subcategory ID" Grid.Column="0" Grid.Row="17"/>
+        <TextBox Grid.Column="1" Grid.Row="17"/>
+
+        <Label Content="Product Model ID" Grid.Column="0" Grid.Row="18"/>
+        <TextBox Grid.Column="1" Grid.Row="18"/>
+
+        <Label Content="Sell start date" Grid.Column="0" Grid.Row="19"/>
+        <DatePicker Grid.Column="1" Grid.Row="19"/>
+
+        <Label Content="Sell end date" Grid.Column="0" Grid.Row="20"/>
+        <DatePicker Grid.Column="1" Grid.Row="20"/>
+        
+        <Label Content="Discontinued date" Grid.Column="0" Grid.Row="21"/>
+        <DatePicker Grid.Column="1" Grid.Row="21"/>
+
+        <Label Content="Modified date" Grid.Column="0" Grid.Row="22"/>
+        <DatePicker Grid.Column="1" Grid.Row="22"/>
+
+        <Button Content="Save" Grid.Row="23" Width="100" HorizontalAlignment="Center"/>
     </Grid>
 </Window>
