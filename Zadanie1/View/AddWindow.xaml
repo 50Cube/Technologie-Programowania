@@ -59,7 +59,7 @@
                 <Binding Path="Name" 
                          UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <vr:StringValidator Min="1" Max="255"/>
+                        <vr:StringValidator Min="1" Max="50"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -72,7 +72,7 @@
                 <Binding Path="ProductNumber" 
                          UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <vr:StringValidator Min="1" Max="255"/>
+                        <vr:StringValidator Min="1" Max="25"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -89,7 +89,7 @@
             <Binding Path="Color" 
                          UpdateSourceTrigger="PropertyChanged">
                 <Binding.ValidationRules>
-                    <vr:StringValidator Min="0" Max="255"/>
+                    <vr:StringValidator Min="0" Max="15"/>
                 </Binding.ValidationRules>
             </Binding>
         </TextBox.Text>
@@ -124,29 +124,86 @@
             </TextBox.Text>
         </TextBox>
         <Label Content="Size" Grid.Column="0" Grid.Row="9"/>
-        <TextBox Name="SizeTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding Size}" Grid.Column="1" Grid.Row="9" Margin="0,0,-147,0"/>
-
+        <TextBox Name="SizeTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Grid.Column="1" Grid.Row="9" Margin="0,0,-147,0">
+        <TextBox.Text>
+                <Binding Path="Size" 
+                         UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <vr:StringValidator Min="0" Max="5"/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox.Text>
+        </TextBox>
         <Label Content="Size unit measure code" Grid.Column="0" Grid.Row="10"/>
-        <TextBox Name="SizeCodeTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding SizeUnitMeasureCode}" Grid.Column="1" Grid.Row="10" Margin="0,0,-147,0"/>
-
+        <TextBox Name="SizeCodeTB" Validation.ErrorTemplate="{StaticResource validationTemplate}"  Grid.Column="1" Grid.Row="10" Margin="0,0,-147,0">
+            <TextBox.Text>
+                <Binding Path="SizeUnitMeasureCode" 
+                                 UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:StringValidator Min="0" Max="3"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text> 
+        </TextBox>
         <Label Content="Weight unit measure code" Grid.Column="0" Grid.Row="11"/>
-        <TextBox Name="WeightCodeTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding WeightUnitMeasureCode}" Grid.Column="1" Grid.Row="11" Margin="0,0,-147,0"/>
-
+        <TextBox Name="WeightCodeTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Grid.Column="1" Grid.Row="11" Margin="0,0,-147,0">
+        <TextBox.Text>
+                <Binding Path="WeightUnitMeasureCode" 
+                                 UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <vr:StringValidator Min="0" Max="3"/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox.Text>
+        </TextBox>
         <Label Content="Weight" Grid.Column="0" Grid.Row="12"/>
-        <TextBox Name="WeightTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding Weight}" Grid.Column="1" Grid.Row="12" Margin="0,0,-147,0"/>
-
+        <TextBox Name="WeightTB" Validation.ErrorTemplate="{StaticResource validationTemplate}"  Grid.Column="1" Grid.Row="12" Margin="0,0,-147,0">
+            <TextBox.Text>
+                <Binding Path="Weight" 
+                                 UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:DecimalValidator />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+    
         <Label Content="Days to manufacture" Grid.Column="0" Grid.Row="13"/>
         <TextBox Name="DaysTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding DaysToManufacture}" Grid.Column="1" Grid.Row="13" Margin="0,0,-147,0"/>
 
         <Label Content="Product line" Grid.Column="0" Grid.Row="14"/>
-        <TextBox Name="ProductLineTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding ProductLine}" Grid.Column="1" Grid.Row="14" Margin="0,0,-147,0"/>
-
+        <TextBox Name="ProductLineTB" Validation.ErrorTemplate="{StaticResource validationTemplate}"  Grid.Column="1" Grid.Row="14" Margin="0,0,-147,0">
+            <TextBox.Text>
+                <Binding Path="ProductLine" 
+                                     UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:StringValidator Min="2" Max="2"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="Class" Grid.Column="0" Grid.Row="15"/>
-        <TextBox Name="ClassTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding Class}" Grid.Column="1" Grid.Row="15" Margin="0,0,-147,0"/>
-
+        <TextBox Name="ClassTB" Validation.ErrorTemplate="{StaticResource validationTemplate}"  Grid.Column="1" Grid.Row="15" Margin="0,0,-147,0">
+            <TextBox.Text>
+                <Binding Path="Class" 
+                                 UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:StringValidator Min="2" Max="2"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="Style" Grid.Column="0" Grid.Row="16"/>
-        <TextBox Name="StyleTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding Style}" Grid.Column="1" Grid.Row="16" Margin="0,0,-147,0"/>
-
+        <TextBox Name="StyleTB" Validation.ErrorTemplate="{StaticResource validationTemplate}"  Grid.Column="1" Grid.Row="16" Margin="0,0,-147,0">
+            <TextBox.Text>
+                <Binding Path="Style" 
+                             UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:StringValidator Min="2" Max="2"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="Product subcategory ID" Grid.Column="0" Grid.Row="17"/>
         <TextBox Name="SubIDTB" Validation.ErrorTemplate="{StaticResource validationTemplate}" Text="{Binding ProductSubcategoryID}" Grid.Column="1" Grid.Row="17" Margin="0,0,-147,0"/>
 
@@ -182,10 +239,6 @@
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StockLevelTB}" Value="False"/>
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=FinishedFlagTB}" Value="False"/>
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MakeFlagTB}" Value="False"/>
-
-
-
-
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True"/>
                         </MultiDataTrigger>

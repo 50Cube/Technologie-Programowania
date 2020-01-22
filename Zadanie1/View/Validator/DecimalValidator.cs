@@ -25,7 +25,7 @@ namespace View.Validator
               $"Please enter positive decimal ");
             }
         
-            if (d>=0.00m){ 
+            if (d>0.00m){ 
                 return ValidationResult.ValidResult;
             }
             else{
