@@ -30,6 +30,7 @@ namespace View
             base.OnInitialized(e);
             ViewModelClass _vm = (ViewModelClass)DataContext;
             _vm.AddWindow = new Lazy<IWindow>(() => new AddWindow());
+            _vm.UpdateWindow = new Lazy<IWindow>(() => new UpdateWindow());
 
         }
     }

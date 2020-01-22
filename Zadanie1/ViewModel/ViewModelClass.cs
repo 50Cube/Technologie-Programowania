@@ -14,6 +14,7 @@ namespace ViewModel
         private DataRepository DataRepository { get; set; }
         private Product product;
         private Product newProduct;
+        private Product updatedProduct;
         private ObservableCollection<Product> products;
 
         public ViewModelClass()
@@ -24,7 +25,9 @@ namespace ViewModel
             RefreshList = new MyCommand(Refresh);
             ShowAddWindow = new MyCommand(DisplayAddWindow);
             DeleteCommand = new MyCommand(DeleteProduct);
+            ShowUpdateWindow = new MyCommand(DisplayUpdateWindow);
             AddProductCommand = new MyCommand(AddNewProduct);
+            UpdateProductCommand = new MyCommand(UpdateProduct);
         }
 
         public Product Product
@@ -52,9 +55,18 @@ namespace ViewModel
         public ICommand ShowAddWindow { get; private set; }
         public ICommand RefreshList { get; private set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand ShowUpdateWindow { get; set; }
         public ICommand AddProductCommand { get; set; }
+        public ICommand UpdateProductCommand { get; set; }
         
         public System.Lazy<IWindow> AddWindow { get; set; }
+        public System.Lazy<IWindow> UpdateWindow { get; set; }
+
+        private void Refresh()
+        {
+            Products = new ObservableCollection<Product>(DataRepository.GetAll().ToList());
+            RaisePropertyChanged("Products");
+        }
 
         private void DisplayAddWindow()
         {
@@ -68,10 +80,10 @@ namespace ViewModel
             Refresh();
         }
 
-        private void Refresh()
+        private void DisplayUpdateWindow()
         {
-            Products = new ObservableCollection<Product>(DataRepository.GetAll().ToList());
-            RaisePropertyChanged("Products");
+            IWindow window = UpdateWindow.Value;
+            window.Show();
         }
 
         private void AddNewProduct()
@@ -106,6 +118,14 @@ namespace ViewModel
             Refresh();
         }
 
+        private void UpdateProduct()
+        {
+            updatedProduct = DataRepository.Get(_ID);
+            updatedProduct.Name = _Name;
+            DataRepository.Update(updatedProduct);
+            Refresh();
+        }
+
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -133,6 +153,14 @@ namespace ViewModel
         private int? _ProductModelID;
         private DateTime? _SellEndDate;
         private Guid _Rowguid = new Guid();
+
+        private int _ID;
+
+        public int ID
+        {
+            get => _ID;
+            set { _ID = value; RaisePropertyChanged("ID"); }
+        }
 
         public string Name
         {
