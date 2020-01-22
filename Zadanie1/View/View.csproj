@@ -61,6 +61,7 @@
     <Compile Include="UpdateWindow.xaml.cs">
       <DependentUpon>UpdateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validator\StringValidator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
