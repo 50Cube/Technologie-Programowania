@@ -8,20 +8,29 @@ using System.Windows.Controls;
 
 namespace View.Validator
 {
-    public class StringValidator : ValidationRule
+    public class DecimalValidator : ValidationRule
     {
-        public int Min { get; set; }
-        public int Max { get; set; }
-
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string s = ((string)value);
-            if (s.Length >= Min && s.Length <= Max ){ 
+            decimal d = 0.00m;
+            try
+            {
+                 d = Decimal.Parse(s);
+   
+            }
+            catch(System.Exception fe)
+            {
+              return new ValidationResult(false,
+              $"Please enter positive decimal ");
+            }
+        
+            if (d>=0.00m){ 
                 return ValidationResult.ValidResult;
             }
             else{
                 return new ValidationResult(false,
-              $"Please enter string in the range: {Min}-{Max}.");
+              $"Please enter positive decimal ");
             }
         }
     }
