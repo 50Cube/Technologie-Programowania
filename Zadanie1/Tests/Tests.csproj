@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="DataContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{E2DC5BDC-327E-422F-89F0-1E2E334819C6}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{7688ABF0-D0AE-412F-A2CF-372C8D6EF309}</Project>
+      <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
