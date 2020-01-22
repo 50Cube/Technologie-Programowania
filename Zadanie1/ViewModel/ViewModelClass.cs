@@ -22,6 +22,7 @@ namespace ViewModel
             Products = new ObservableCollection<Product>(DataRepository.GetAll().ToList());
             Product = new Product();
             ShowAddWindow = new MyCommand(DisplayAddWindow);
+            DeleteCommand = new MyCommand(DeleteProduct);
             AddProductCommand = new MyCommand(AddNewProduct);
         }
 
@@ -48,14 +49,20 @@ namespace ViewModel
         }
 
         public ICommand ShowAddWindow { get; private set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand AddProductCommand { get; set; }
-
+        
         public System.Lazy<IWindow> AddWindow { get; set; }
 
         private void DisplayAddWindow()
         {
             IWindow window = AddWindow.Value;
             window.Show();
+        }
+
+        private void DeleteProduct()
+        {
+            DataRepository.Delete(this.Product.ProductID);
         }
 
         private void AddNewProduct()
