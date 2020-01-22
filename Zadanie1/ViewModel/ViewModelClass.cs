@@ -58,7 +58,7 @@ namespace ViewModel
         public ICommand ShowUpdateWindow { get; set; }
         public ICommand AddProductCommand { get; set; }
         public ICommand UpdateProductCommand { get; set; }
-        
+
         public System.Lazy<IWindow> AddWindow { get; set; }
         public System.Lazy<IWindow> UpdateWindow { get; set; }
 
