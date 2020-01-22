@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ViewModel
@@ -76,8 +77,10 @@ namespace ViewModel
 
         private void DeleteProduct()
         {
-            DataRepository.Delete(this.Product.ProductID);
-            Refresh();
+            Task.Run(() => {
+                DataRepository.Delete(this.Product.ProductID);
+                Refresh();
+            });
         }
 
         private void DisplayUpdateWindow()
@@ -88,46 +91,52 @@ namespace ViewModel
 
         private void AddNewProduct()
         {
-            newProduct = new Product
+            Task.Run(() =>
             {
-                Name = this._Name,
-                ProductNumber = _ProductNumber,
-                MakeFlag = _MakeFlag,
-                FinishedGoodsFlag = _FinishedGoodsFlag,
-                Color = _Color,
-                SafetyStockLevel = _SafetyStockLevel,
-                ReorderPoint = _ReorderPoint,
-                StandardCost = _StandardCost,
-                ListPrice = _ListPrice,
-                Size = _Size,
-                SizeUnitMeasureCode = _SizeUnitMeasureCode,
-                WeightUnitMeasureCode = _WeightUnitMeasureCode,
-                Weight = _Weight,
-                DaysToManufacture = _DaysToManufacture,
-                ProductLine = _ProductLine,
-                Class = _Class,
-                Style = _Style,
-                ProductSubcategoryID = _ProductSubcategoryID,
-                ProductModelID = _ProductModelID,
-                SellStartDate = DateTime.Now,
-                SellEndDate = _SellEndDate,
-                rowguid = Guid.NewGuid(),
-                ModifiedDate = DateTime.Now
-            };
-            DataRepository.Add(newProduct);
-            Refresh();
+                newProduct = new Product
+                {
+                    Name = this._Name,
+                    ProductNumber = _ProductNumber,
+                    MakeFlag = _MakeFlag,
+                    FinishedGoodsFlag = _FinishedGoodsFlag,
+                    Color = _Color,
+                    SafetyStockLevel = _SafetyStockLevel,
+                    ReorderPoint = _ReorderPoint,
+                    StandardCost = _StandardCost,
+                    ListPrice = _ListPrice,
+                    Size = _Size,
+                    SizeUnitMeasureCode = _SizeUnitMeasureCode,
+                    WeightUnitMeasureCode = _WeightUnitMeasureCode,
+                    Weight = _Weight,
+                    DaysToManufacture = _DaysToManufacture,
+                    ProductLine = _ProductLine,
+                    Class = _Class,
+                    Style = _Style,
+                    ProductSubcategoryID = _ProductSubcategoryID,
+                    ProductModelID = _ProductModelID,
+                    SellStartDate = DateTime.Now,
+                    SellEndDate = _SellEndDate,
+                    rowguid = Guid.NewGuid(),
+                    ModifiedDate = DateTime.Now
+                };
+                DataRepository.Add(newProduct);
+                Refresh();
+            });
         }
 
         private void UpdateProduct()
         {
-            updatedProduct = DataRepository.Get(_ID);
-            updatedProduct.Name = _Name;
-            updatedProduct.ProductNumber = _ProductNumber;
-            updatedProduct.Color = _Color;
-            updatedProduct.StandardCost = _StandardCost;
-            updatedProduct.ListPrice = _ListPrice;
-            DataRepository.Update(updatedProduct);
-            Refresh();
+            Task.Run(() =>
+            {
+                updatedProduct = DataRepository.Get(_ID);
+                updatedProduct.Name = _Name;
+                updatedProduct.ProductNumber = _ProductNumber;
+                updatedProduct.Color = _Color;
+                updatedProduct.StandardCost = _StandardCost;
+                updatedProduct.ListPrice = _ListPrice;
+                DataRepository.Update(updatedProduct);
+                Refresh();
+            });
         }
 
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
