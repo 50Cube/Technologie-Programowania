@@ -49,9 +49,8 @@
             <TextBlock Text="{Binding Product.SellEndDate, StringFormat='Sell end date: {0}'}" Grid.Row="9"/>
         </Grid>
 
-        <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" Command="{Binding DeleteCommand}"/>
         <Button Width="190" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Add new product" Command="{Binding ShowAddWindow}"/>
-        <Button Width="190" Height="80" Margin="0,0,195,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" />
+        <Button Width="190" Height="80" Margin="0,0,195,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Delete product" Command="{Binding DeleteCommand}"/>
         
     </Grid>
 </Window>
