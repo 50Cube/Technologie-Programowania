@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{B16B742F-CC99-4E19-A2CB-E6902B19626E}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{E2DC5BDC-327E-422F-89F0-1E2E334819C6}</Project>
       <Name>Model</Name>
