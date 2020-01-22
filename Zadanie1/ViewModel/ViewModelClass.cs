@@ -122,6 +122,10 @@ namespace ViewModel
         {
             updatedProduct = DataRepository.Get(_ID);
             updatedProduct.Name = _Name;
+            updatedProduct.ProductNumber = _ProductNumber;
+            updatedProduct.Color = _Color;
+            updatedProduct.StandardCost = _StandardCost;
+            updatedProduct.ListPrice = _ListPrice;
             DataRepository.Update(updatedProduct);
             Refresh();
         }
