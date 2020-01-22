@@ -21,7 +21,7 @@ namespace View.Validator
             }
             else{
                 return new ValidationResult(false,
-              $"Please enter string in the range: {Min}-{Max}.");
+              $"Validation Error");
             }
         }
     }
