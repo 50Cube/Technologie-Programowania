@@ -63,6 +63,13 @@ namespace ViewModel
         private void DeleteProduct()
         {
             DataRepository.Delete(this.Product.ProductID);
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            Products = new ObservableCollection<Product>(DataRepository.GetAll().ToList());
+            RaisePropertyChanged("Products");
         }
 
         private void AddNewProduct()
@@ -94,6 +101,7 @@ namespace ViewModel
                 ModifiedDate = DateTime.Now
             };
             DataRepository.Add(newProduct);
+            Refresh();
         }
 
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
